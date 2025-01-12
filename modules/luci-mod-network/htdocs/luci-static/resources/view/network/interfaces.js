@@ -572,7 +572,7 @@ return view.extend({
 				o.default = o.enabled;
 
 				if (L.hasSystemFeature('firewall')) {
-					o = s.taboption('firewall', widgets.ZoneSelect, '_zone', _('Create / Assign firewall-zone'), _('Choose the firewall zone you want to assign to this interface. Select <em>unspecified</em> to remove the interface from the associated zone or fill out the <em>custom</em> field to define a new zone and attach the interface to it.'));
+					o = s.taboption('firewall', widgets.ZoneSelect, '_zone', _('Create / Assign firewall-zone'));
 					o.network = ifc.getName();
 					o.optional = true;
 
@@ -658,20 +658,20 @@ return view.extend({
 						]);
 					};
 
-					ss.taboption('general', form.Flag, 'ignore', _('Ignore interface'), _('Disable <abbr title="Dynamic Host Configuration Protocol">DHCP</abbr> for this interface.'));
+					ss.taboption('general', form.Flag, 'ignore', _('Ignore interface'));
 
 					if (protoval == 'static') {
-						so = ss.taboption('general', form.Value, 'start', _('Start'), _('Lowest leased address as offset from the network address.'));
+						so = ss.taboption('general', form.Value, 'start', _('Start ip'));
 						so.optional = true;
 						so.datatype = 'or(uinteger,ip4addr("nomask"))';
 						so.default = '100';
 
-						so = ss.taboption('general', form.Value, 'limit', _('Limit'), _('Maximum number of leased addresses.'));
+						so = ss.taboption('general', form.Value, 'limit', _('Limit'));
 						so.optional = true;
 						so.datatype = 'uinteger';
 						so.default = '150';
 
-						so = ss.taboption('general', form.Value, 'leasetime', _('Lease time'), _('Expiry time of leased addresses, minimum is 2 minutes (<code>2m</code>).'));
+						so = ss.taboption('general', form.Value, 'leasetime', _('Lease duration'));
 						so.optional = true;
 						so.default = '12h';
 						so.validate = function (section_id, value) {
@@ -686,15 +686,15 @@ return view.extend({
 							return _("Invalid DHCP lease time format. Use integer values optionally followed by s, m, h, d, or w.");
 						}
 
-						so = ss.taboption('advanced', form.Flag, 'dynamicdhcp', _('Dynamic <abbr title="Dynamic Host Configuration Protocol">DHCP</abbr>'), _('Dynamically allocate DHCP addresses for clients. If disabled, only clients having static leases will be served.'));
+						so = ss.taboption('advanced', form.Flag, 'dynamicdhcp', _('Dynamic DHCP'));
 						so.default = so.enabled;
 
-						ss.taboption('advanced', form.Flag, 'force', _('Force'), _('Force DHCP on this network even if another server is detected.'));
+						ss.taboption('advanced', form.Flag, 'force', _('Force'));
 
 						// XXX: is this actually useful?
-						//ss.taboption('advanced', form.Value, 'name', _('Name'), _('Define a name for this network.'));
+						//ss.taboption('advanced', form.Value, 'name', _('Name'));
 
-						so = ss.taboption('advanced', form.Value, 'netmask', _('<abbr title="Internet Protocol Version 4">IPv4</abbr>-Netmask'), _('Override the netmask sent to clients. Normally it is calculated from the subnet that is served.'));
+						so = ss.taboption('advanced', form.Value, 'netmask', _('IPv4-Netmask'));
 						so.optional = true;
 						so.datatype = 'ip4addr';
 
@@ -710,7 +710,7 @@ return view.extend({
 							return form.Value.prototype.validate.apply(this, [ section_id, value ]);
 						};
 
-						ss.taboption('advanced', form.DynamicList, 'dhcp_option', _('DHCP-Options'), _('Define additional DHCP options,  for example "<code>6,192.168.2.1,192.168.2.2</code>" which advertises different DNS servers to clients.'));
+						ss.taboption('advanced', form.DynamicList, 'dhcp_option', _('DHCP-Options'));
 					}
 
 
@@ -720,15 +720,11 @@ return view.extend({
 
 					so = ss.taboption('ipv6', form.Flag , 'master', _('Designated master'));
 					so.readonly = has_other_master ? true : false;
-					so.description = has_other_master
-						? _('Interface "%h" is already marked as designated master.').format(has_other_master.interface || has_other_master['.name'])
-						: _('Set this interface as master for RA and DHCPv6 relaying as well as NDP proxying.')
-					;
-
+					
 					so.validate = function(section_id, value) {
-						var hybrid_downstream_desc = _('Operate in <em>relay mode</em> if a designated master interface is configured and active, otherwise fall back to <em>server mode</em>.'),
-						    ndp_downstream_desc = _('Operate in <em>relay mode</em> if a designated master interface is configured and active, otherwise disable <abbr title="Neighbour Discovery Protocol">NDP</abbr> proxying.'),
-						    hybrid_master_desc = _('Operate in <em>relay mode</em> if an upstream IPv6 prefix is present, otherwise disable service.'),
+						var hybrid_downstream_desc = _(''),
+						    ndp_downstream_desc = _(''),
+						    hybrid_master_desc = _(''),
 						    ra_server_allowed = true,
 						    checked = this.formvalue(section_id),
 						    dhcpv6 = this.section.getOption('dhcpv6').getUIElement(section_id),
@@ -789,45 +785,32 @@ return view.extend({
 					};
 
 
-					so = ss.taboption('ipv6', form.RichListValue, 'ra', _('<abbr title="Router Advertisement">RA</abbr>-Service'),
-						_('Configures the operation mode of the <abbr title="Router Advertisement">RA</abbr> service on this interface.'));
+					so = ss.taboption('ipv6', form.RichListValue, 'ra', _('RA Service'));
 					so.optional = true;
-					so.value('', _('disabled'),
-						_('Do not send any <abbr title="Router Advertisement, ICMPv6 Type 134">RA</abbr> messages on this interface.'));
-					so.value('server', _('server mode'),
-						_('Send <abbr title="Router Advertisement, ICMPv6 Type 134">RA</abbr> messages advertising this device as IPv6 router.'));
-					so.value('relay', _('relay mode'),
-						_('Forward <abbr title="Router Advertisement, ICMPv6 Type 134">RA</abbr> messages received on the designated master interface to downstream interfaces.'));
+					so.value('', _('disabled'));
+					so.value('server', _('server mode'));
+					so.value('relay', _('relay mode'));
 					so.value('hybrid', _('hybrid mode'), ' ');
 
 
-					so = ss.taboption('ipv6-ra', form.RichListValue, 'ra_default', _('Default router'),
-						_('Configures the default router advertisement in <abbr title="Router Advertisement">RA</abbr> messages.'));
+					so = ss.taboption('ipv6-ra', form.RichListValue, 'ra_default', _('Default router'));
 					so.optional = true;
-					so.value('', _('automatic'),
-						_('Announce this device as default router if a local IPv6 default route is present.'));
-					so.value('1', _('on available prefix'),
-						_('Announce this device as default router if a public IPv6 prefix is available, regardless of local default route availability.'));
-					so.value('2', _('forced'),
-						_('Announce this device as default router regardless of whether a prefix or default route is present.'));
+					so.value('', _('automatic'));
+					so.value('1', _('on available prefix'));
+					so.value('2', _('forced'));
 					so.depends('ra', 'server');
 					so.depends({ ra: 'hybrid', master: '0' });
 
-					so = ss.taboption('ipv6-ra', form.Flag, 'ra_slaac', _('Enable <abbr title="Stateless Address Auto Config">SLAAC</abbr>'),
-						_('Set the autonomous address-configuration flag in the prefix information options of sent <abbr title="Router Advertisement">RA</abbr> messages. When enabled, clients will perform stateless IPv6 address autoconfiguration.'));
+					so = ss.taboption('ipv6-ra', form.Flag, 'ra_slaac', _('Enable SLAAC'));
 					so.default = so.enabled;
 					so.depends('ra', 'server');
 					so.depends({ ra: 'hybrid', master: '0' });
 
-					so = ss.taboption('ipv6-ra', form.RichListValue, 'ra_flags', _('<abbr title="Router Advertisement">RA</abbr> Flags'),
-						_('Specifies the flags sent in <abbr title="Router Advertisement">RA</abbr> messages, for example to instruct clients to request further information via stateful DHCPv6.'));
+					so = ss.taboption('ipv6-ra', form.RichListValue, 'ra_flags', _('RA Flags'));
 					so.optional = true;
-					so.value('managed-config', _('managed config (M)'),
-						_('The <em>Managed address configuration</em> (M) flag indicates that IPv6 addresses are available via DHCPv6.'));
-					so.value('other-config', _('other config (O)'),
-						_('The <em>Other configuration</em> (O) flag indicates that other information, such as DNS servers, is available via DHCPv6.'));
-					so.value('home-agent', _('mobile home agent (H)'),
-						_('The <em>Mobile IPv6 Home Agent</em> (H) flag indicates that the device is also acting as Mobile IPv6 home agent on this link.'));
+					so.value('managed-config', _('managed config (M)'));
+					so.value('other-config', _('other config (O)'));
+					so.value('home-agent', _('mobile home agent (H)'));
 					so.multiple = true;
 					so.select_placeholder = _('none');
 					so.depends('ra', 'server');
@@ -847,35 +830,35 @@ return view.extend({
 						}
 					};
 
-					so = ss.taboption('ipv6-ra', form.Value, 'ra_pref64', _('NAT64 prefix'), _('Announce NAT64 prefix in <abbr title="Router Advertisement">RA</abbr> messages.'));
+					so = ss.taboption('ipv6-ra', form.Value, 'ra_pref64', _('NAT64 prefix'));
 					so.optional = true;
 					so.datatype = 'cidr6';
 					so.placeholder = '64:ff9b::/96';
 					so.depends('ra', 'server');
 					so.depends({ ra: 'hybrid', master: '0' });
 
-					so = ss.taboption('ipv6-ra', form.Value, 'ra_maxinterval', _('Max <abbr title="Router Advertisement">RA</abbr> interval'), _('Maximum time allowed  between sending unsolicited <abbr title="Router Advertisement, ICMPv6 Type 134">RA</abbr>. Default is 600 seconds.'));
+					so = ss.taboption('ipv6-ra', form.Value, 'ra_maxinterval', _('Max RA interval'));
 					so.optional = true;
 					so.datatype = 'uinteger';
 					so.placeholder = '600';
 					so.depends('ra', 'server');
 					so.depends({ ra: 'hybrid', master: '0' });
 
-					so = ss.taboption('ipv6-ra', form.Value, 'ra_mininterval', _('Min <abbr title="Router Advertisement">RA</abbr> interval'), _('Minimum time allowed  between sending unsolicited <abbr title="Router Advertisement, ICMPv6 Type 134">RA</abbr>. Default is 200 seconds.'));
+					so = ss.taboption('ipv6-ra', form.Value, 'ra_mininterval', _('Min RA interval'));
 					so.optional = true;
 					so.datatype = 'uinteger';
 					so.placeholder = '200';
 					so.depends('ra', 'server');
 					so.depends({ ra: 'hybrid', master: '0' });
 
-					so = ss.taboption('ipv6-ra', form.Value, 'ra_lifetime', _('<abbr title="Router Advertisement">RA</abbr> Lifetime'), _('Router Lifetime published  in <abbr title="Router Advertisement, ICMPv6 Type 134">RA</abbr> messages.  Maximum is 9000 seconds.'));
+					so = ss.taboption('ipv6-ra', form.Value, 'ra_lifetime', _('RA Lifetime'));
 					so.optional = true;
 					so.datatype = 'range(0, 9000)';
 					so.placeholder = '1800';
 					so.depends('ra', 'server');
 					so.depends({ ra: 'hybrid', master: '0' });
 
-					so = ss.taboption('ipv6-ra', form.Value, 'ra_mtu', _('<abbr title="Router Advertisement">RA</abbr> MTU'), _('The <abbr title="Maximum Transmission Unit">MTU</abbr>  to be published in <abbr title="Router Advertisement, ICMPv6 Type 134">RA</abbr> messages. Minimum is 1280 bytes.'));
+					so = ss.taboption('ipv6-ra', form.Value, 'ra_mtu', _('RA MTU'));
 					so.optional = true;
 					so.datatype = 'range(1280, 65535)';
 					so.depends('ra', 'server');
@@ -894,7 +877,7 @@ return view.extend({
 						}, this));
 					};
 
-					so = ss.taboption('ipv6-ra', form.Value, 'ra_hoplimit', _('<abbr title="Router Advertisement">RA</abbr> Hop Limit'), _('The maximum hops  to be published in <abbr title="Router Advertisement">RA</abbr> messages. Maximum is 255 hops.'));
+					so = ss.taboption('ipv6-ra', form.Value, 'ra_hoplimit', _('RA Hop Limit'));
 					so.optional = true;
 					so.datatype = 'range(0, 255)';
 					so.depends('ra', 'server');
@@ -914,40 +897,32 @@ return view.extend({
 					};
 
 
-					so = ss.taboption('ipv6', form.RichListValue, 'dhcpv6', _('DHCPv6-Service'),
-						_('Configures the operation mode of the DHCPv6 service on this interface.'));
+					so = ss.taboption('ipv6', form.RichListValue, 'dhcpv6', _('DHCPv6-Service'));
 					so.optional = true;
-					so.value('', _('disabled'),
-						_('Do not offer DHCPv6 service on this interface.'));
-					so.value('server', _('server mode'),
-						_('Provide a DHCPv6 server on this interface and reply to DHCPv6 solicitations and requests.'));
-					so.value('relay', _('relay mode'),
-						_('Forward DHCPv6 messages between the designated master interface and downstream interfaces.'));
+					so.value('', _('disabled'));
+					so.value('server', _('server mode'));
+					so.value('relay', _('relay mode'));
 					so.value('hybrid', _('hybrid mode'), ' ');
 
-					so = ss.taboption('ipv6', form.Value, 'dhcpv6_pd_min_len', _('<abbr title="Prefix Delegation">PD</abbr> minimum length'),
-						_('Configures the minimum delegated prefix length assigned to a requesting downstream router, potentially overriding a requested prefix length. If left unspecified, the device will assign the smallest available prefix greater than or equal to the requested prefix.'));
+					so = ss.taboption('ipv6', form.Value, 'dhcpv6_pd_min_len', _('PD minimum length'));
 					so.datatype = 'range(1,62)';
 					so.depends('dhcpv6', 'server');
 
-					so = ss.taboption('ipv6', form.DynamicList, 'dns', _('Announced IPv6 DNS servers'),
-						_('Specifies a fixed list of IPv6 DNS server addresses to announce via DHCPv6. If left unspecified, the device will announce itself as IPv6 DNS server unless the <em>Local IPv6 DNS server</em> option is disabled.'));
+					so = ss.taboption('ipv6', form.DynamicList, 'dns', _('Announced IPv6 DNS servers'));
 					so.datatype = 'ip6addr("nomask")'; /* restrict to IPv6 only for now since dnsmasq (DHCPv4) does not honour this option */
 					so.depends('ra', 'server');
 					so.depends({ ra: 'hybrid', master: '0' });
 					so.depends('dhcpv6', 'server');
 					so.depends({ dhcpv6: 'hybrid', master: '0' });
 
-					so = ss.taboption('ipv6', form.Flag, 'dns_service', _('Local IPv6 DNS server'),
-						_('Announce this device as IPv6 DNS server.'));
+					so = ss.taboption('ipv6', form.Flag, 'dns_service', _('Local IPv6 DNS server'));
 					so.default = so.enabled;
 					so.depends({ ra: 'server', dns: /^$/ });
 					so.depends({ ra: 'hybrid', dns: /^$/, master: '0' });
 					so.depends({ dhcpv6: 'server', dns: /^$/ });
 					so.depends({ dhcpv6: 'hybrid', dns: /^$/, master: '0' });
 
-					so = ss.taboption('ipv6', form.DynamicList, 'domain', _('Announced DNS domains'),
-						_('Specifies a fixed list of DNS search domains to announce via DHCPv6. If left unspecified, the local device DNS search domain will be announced.'));
+					so = ss.taboption('ipv6', form.DynamicList, 'domain', _('Announced DNS domains'));
 					so.datatype = 'hostname';
 					so.depends('ra', 'server');
 					so.depends({ ra: 'hybrid', master: '0' });
@@ -955,8 +930,7 @@ return view.extend({
 					so.depends({ dhcpv6: 'hybrid', master: '0' });
 
 					//This is a DHCPv6 specific odhcpd setting
-					so = ss.taboption('ipv6', form.DynamicList, 'ntp', _('NTP Servers'),
-						_('DHCPv6 option 56. %s.', 'DHCPv6 option 56. RFC5908 link').format('<a href="%s" target="_blank">RFC5908</a>').format('https://www.rfc-editor.org/rfc/rfc5908#section-4'));
+					so = ss.taboption('ipv6', form.DynamicList, 'ntp', _('NTP Servers'));
 					so.datatype = 'host(0)';
 					for(var x of uci.get('system', 'ntp', 'server') || '') {
 						so.value(x);
@@ -980,26 +954,23 @@ return view.extend({
 					so.depends('dhcpv6', 'server');
 					so.depends({ dhcpv6: 'hybrid', master: '0' });
 
-					so = ss.taboption('ipv6', form.RichListValue, 'ndp', _('<abbr title="Neighbour Discovery Protocol">NDP</abbr>-Proxy'),
-						_('Configures the operation mode of the NDP proxy service on this interface.'));
+					so = ss.taboption('ipv6', form.RichListValue, 'ndp', _('NDP-Proxy'));
 					so.optional = true;
-					so.value('', _('disabled'),
-						_('Do not proxy any <abbr title="Neighbour Discovery Protocol">NDP</abbr> packets.'));
-					so.value('relay', _('relay mode'),
-						_('Forward <abbr title="Neighbour Discovery Protocol">NDP</abbr> <abbr title="Neighbour Solicitation, Type 135">NS</abbr> and <abbr title="Neighbour Advertisement, Type 136">NA</abbr> messages between the designated master interface and downstream interfaces.'));
+					so.value('', _('disabled'));
+					so.value('relay', _('relay mode'));
 					so.value('hybrid', _('hybrid mode'), ' ');
 
 
-					so = ss.taboption('ipv6', form.Flag, 'ndproxy_routing', _('Learn routes'), _('Set up routes for proxied IPv6 neighbours.'));
+					so = ss.taboption('ipv6', form.Flag, 'ndproxy_routing', _('Learn routes'));
 					so.default = so.enabled;
 					so.depends('ndp', 'relay');
 					so.depends('ndp', 'hybrid');
 
-					so = ss.taboption('ipv6', form.Flag, 'ndproxy_slave', _('NDP-Proxy slave'), _('Set interface as NDP-Proxy external slave. Default is off.'));
+					so = ss.taboption('ipv6', form.Flag, 'ndproxy_slave', _('NDP-Proxy slave'));
 					so.depends({ ndp: 'relay', master: '0' });
 					so.depends({ ndp: 'hybrid', master: '0' });
 
-					so = ss.taboption('ipv6', form.Value, 'preferred_lifetime', _('IPv6 Prefix Lifetime'), _('Preferred lifetime for a prefix.'));
+					so = ss.taboption('ipv6', form.Value, 'preferred_lifetime', _('IPv6 Prefix Lifetime'));
 					so.optional = true;
 					so.placeholder = '12h';
 					so.value('5m', _('5m (5 minutes)'));
@@ -1008,18 +979,18 @@ return view.extend({
 					so.value('7d', _('7d (7 days)'));
 
 					//This is a ra_* setting, but its placement is more logical/findable under IPv6 settings.
-					so = ss.taboption('ipv6', form.Flag, 'ra_useleasetime', _('Follow IPv4 Lifetime'), _('DHCPv4 <code>leasetime</code> is used as limit and preferred lifetime of the IPv6 prefix.'));
+					so = ss.taboption('ipv6', form.Flag, 'ra_useleasetime', _('Follow IPv4 Lifetime'));
 					so.optional = true;
 				}
 
 				ifc.renderFormOptions(s);
 
 				// Common interface options
-				o = nettools.replaceOption(s, 'advanced', form.Flag, 'defaultroute', _('Use default gateway'), _('If unchecked, no default route is configured'));
+				o = nettools.replaceOption(s, 'advanced', form.Flag, 'defaultroute', _('Use default gateway'));
 				o.default = o.enabled;
 
 				if (has_peerdns(protoval)) {
-					o = nettools.replaceOption(s, 'advanced', form.Flag, 'peerdns', _('Use DNS servers advertised by peer'), _('If unchecked, the advertised DNS server addresses are ignored'));
+					o = nettools.replaceOption(s, 'advanced', form.Flag, 'peerdns', _('Use DNS servers advertised by peer'));
 					o.default = o.enabled;
 				}
 
@@ -1033,12 +1004,11 @@ return view.extend({
 					o.depends('peerdns', '0');
 				o.datatype = 'hostname';
 
-				o = nettools.replaceOption(s, 'advanced', form.Value, 'dns_metric', _('DNS weight'), _('The DNS server entries in the local resolv.conf are primarily sorted by the weight specified here'));
+				o = nettools.replaceOption(s, 'advanced', form.Value, 'dns_metric', _('DNS weight'));
 				o.datatype = 'uinteger';
 				o.placeholder = '0';
 
-				o = nettools.replaceOption(s, 'advanced', form.Value, 'metric', _('Use gateway metric'),
-					_('Metric is an ordinal, where a gateway with 1 is chosen 1st, 2 is chosen 2nd, 3 is chosen 3rd, etc'));
+				o = nettools.replaceOption(s, 'advanced', form.Value, 'metric', _('Use gateway metric'));
 				o.datatype = 'uinteger';
 				o.placeholder = '0';
 
@@ -1053,19 +1023,19 @@ return view.extend({
 					o.value(rtTables[i][1], '%s (%d)'.format(rtTables[i][1], rtTables[i][0]));
 
 				if (has_sourcefilter(protoval)) {
-					o = nettools.replaceOption(s, 'advanced', form.Flag, 'sourcefilter', _('IPv6 source routing'), _('Automatically handle multiple uplink interfaces using source-based policy routing.'));
+					o = nettools.replaceOption(s, 'advanced', form.Flag, 'sourcefilter', _('IPv6 source routing'));
 					o.default = o.enabled;
 				}
 
-				o = nettools.replaceOption(s, 'advanced', form.Flag, 'delegate', _('Delegate IPv6 prefixes'), _('Enable downstream delegation of IPv6 prefixes available on this interface'));
+				o = nettools.replaceOption(s, 'advanced', form.Flag, 'delegate', _('Delegate IPv6 prefixes'));
 				o.default = o.enabled;
 
-				o = nettools.replaceOption(s, 'advanced', form.Value, 'ip6assign', _('IPv6 assignment length'), _('Assign a part of given length of every public IPv6-prefix to this interface'));
+				o = nettools.replaceOption(s, 'advanced', form.Value, 'ip6assign', _('IPv6 assignment length'));
 				o.value('', _('disabled'));
 				o.value('64');
 				o.datatype = 'max(128)';
 
-				o = nettools.replaceOption(s, 'advanced', form.Value, 'ip6hint', _('IPv6 assignment hint'), _('Assign prefix parts using this hexadecimal subprefix ID for this interface.'));
+				o = nettools.replaceOption(s, 'advanced', form.Value, 'ip6hint', _('IPv6 assignment hint'));
 				o.placeholder = '0';
 				o.validate = function(section_id, value) {
 					if (value == null || value == '')
@@ -1082,7 +1052,7 @@ return view.extend({
 					o.depends('ip6assign', String(i));
 
 
-				o = nettools.replaceOption(s, 'advanced', form.DynamicList, 'ip6class', _('IPv6 prefix filter'), _('If set, downstream subnets are only allocated from the given IPv6 prefix classes.'));
+				o = nettools.replaceOption(s, 'advanced', form.DynamicList, 'ip6class', _('IPv6 prefix filter'));
 				o.value('local', 'local (%s)'.format(_('Local ULA')));
 
 				var prefixClasses = {};
@@ -1105,11 +1075,11 @@ return view.extend({
 				});
 
 
-				o = nettools.replaceOption(s, 'advanced', form.Value, 'ip6ifaceid', _('IPv6 suffix'), _("Optional. Allowed values: 'eui64', 'random', fixed value like '::1' or '::1:2'. When IPv6 prefix (like 'a:b:c:d::') is received from a delegating server, use the suffix (like '::1') to form the IPv6 address ('a:b:c:d::1') for the interface."));
+				o = nettools.replaceOption(s, 'advanced', form.Value, 'ip6ifaceid', _('IPv6 suffix'));
 				o.datatype = 'ip6hostid';
 				o.placeholder = '::1';
 
-				o = nettools.replaceOption(s, 'advanced', form.Value, 'ip6weight', _('IPv6 preference'), _('When delegating prefixes to multiple downstreams, interfaces with a higher preference value are considered first when allocating subnets.'));
+				o = nettools.replaceOption(s, 'advanced', form.Value, 'ip6weight', _('IPv6 preference'));
 				o.datatype = 'uinteger';
 				o.placeholder = '0';
 
@@ -1323,7 +1293,7 @@ return view.extend({
 		o.modalonly = true;
 		o.default = o.enabled;
 
-		o = s.taboption('advanced', form.Flag, 'force_link', _('Force link'), _('Set interface properties regardless of the link carrier (If set, carrier sense events do not invoke hotplug handlers).'));
+		o = s.taboption('advanced', form.Flag, 'force_link', _('Force link'));
 		o.modalonly = true;
 		o.defaults = {
 			'1': [{ proto: 'static' }],
@@ -1565,13 +1535,10 @@ return view.extend({
 		s.addremove = false;
 		s.anonymous = true;
 
-		o = s.option(form.Value, 'ula_prefix', _('IPv6 ULA-Prefix'),
-			_('Unique Local Address (%s) - prefix <code>fd00::/8</code> (the L bit is always 1).').format('<a href="%s" target="_blank">RFC4193</a>').format('https://datatracker.ietf.org/doc/html/rfc4193#section-3') + ' ' +
-			_('ULA for IPv6 is analogous to IPv4 private network addressing.') + ' ' +
-			_('This prefix is randomly generated at first install.'));
+		o = s.option(form.Value, 'ula_prefix', _('IPv6 ULA-Prefix'));
 		o.datatype = 'cidr6';
 
-		o = s.option(form.ListValue, 'packet_steering', _('Packet Steering'), _('Enable packet steering across CPUs. May help or hinder network speed.'));
+		o = s.option(form.ListValue, 'packet_steering', _('Packet Steering'));
 		o.value('', _('Disabled'));
 		o.value('1',_('Enabled'));
 		o.value('2',_('Enabled (all CPUs)'));
@@ -1579,9 +1546,7 @@ return view.extend({
 
 		var steer_flow = uci.get('network', 'globals', 'steering_flows');	
 
-		o = s.option(form.Value, 'steering_flows', _('Steering flows (<abbr title="Receive Packet Steering">RPS</abbr>)'),
-			_('Directs packet flows to specific CPUs where the local socket owner listens (the local service).') + ' ' +
-			_('Note: this setting is for local services on the device only (not for forwarding).'));
+		o = s.option(form.Value, 'steering_flows', _('Steering flows'));
 		o.value('', _('Standard: none'));
 		o.value('128', _('Suggested: 128'));
 		o.value('256', _('256'));
@@ -1648,7 +1613,7 @@ return view.extend({
 
 		// Show ATM bridge section if we have the capabilities
 		if (L.hasSystemFeature('br2684ctl')) {
-			s = m.section(form.TypedSection, 'atm-bridge', _('ATM Bridges'), _('ATM bridges expose encapsulated ethernet in AAL5 connections as virtual Linux network interfaces which can be used in conjunction with DHCP or PPP to dial into the provider network.'));
+			s = m.section(form.TypedSection, 'atm-bridge', _('ATM Bridges'));
 
 			s.addremove = true;
 			s.anonymous = true;
