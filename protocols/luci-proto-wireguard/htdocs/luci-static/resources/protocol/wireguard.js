@@ -134,14 +134,14 @@ return network.registerProtocol('wireguard', {
 
 		// -- general ---------------------------------------------------------------------
 
-		o = s.taboption('general', form.Value, 'private_key', _('Private Key'), _('Required. Base64-encoded private key for this interface.'));
+		o = s.taboption('general', form.Value, 'private_key', _('Private Key'));
 		o.password = true;
 		o.validate = validateBase64;
 		o.rmempty = false;
 
 		var serverName = this.getIfname();
 
-		o = s.taboption('general', form.Value, 'public_key', _('Public Key'), _('Base64-encoded public key of this interface for sharing.'));
+		o = s.taboption('general', form.Value, 'public_key', _('Public Key'));
 		o.rmempty = false;
 		o.write = function() {/* write nothing */};
 
@@ -159,19 +159,19 @@ return network.registerProtocol('wireguard', {
 
 		s.taboption('general', cbiKeyPairGenerate, '_gen_server_keypair', ' ');
 
-		o = s.taboption('general', form.Value, 'listen_port', _('Listen Port'), _('Optional. UDP port used for outgoing and incoming packets.'));
+		o = s.taboption('general', form.Value, 'listen_port', _('Listen Port'));
 		o.datatype = 'port';
 		o.placeholder = _('random');
 		o.optional = true;
 
-		o = s.taboption('general', form.DynamicList, 'addresses', _('IP Addresses'), _('Recommended. IP addresses of the WireGuard interface.'));
+		o = s.taboption('general', form.DynamicList, 'addresses', _('IP Addresses'));
 		o.datatype = 'ipaddr';
 		o.optional = true;
 
-		o = s.taboption('general', form.Flag, 'nohostroute', _('No Host Routes'), _('Optional. Do not create host routes to peers.'));
+		o = s.taboption('general', form.Flag, 'nohostroute', _('No Host Routes'));
 		o.optional = true;
 
-		o = s.taboption('general', form.Button, '_import', _('Import configuration'), _('Imports settings from an existing WireGuard configuration file'));
+		o = s.taboption('general', form.Button, '_import', _('Import configuration'));
 		o.inputtitle = _('Load configuration…');
 		o.onclick = function() {
 			return ss.handleConfigImport('full');
@@ -179,12 +179,12 @@ return network.registerProtocol('wireguard', {
 
 		// -- advanced --------------------------------------------------------------------
 
-		o = s.taboption('advanced', form.Value, 'mtu', _('MTU'), _('Optional. Maximum Transmission Unit of tunnel interface.'));
+		o = s.taboption('advanced', form.Value, 'mtu', _('MTU'));
 		o.datatype = 'range(0,8940)';
 		o.placeholder = '1420';
 		o.optional = true;
 
-		o = s.taboption('advanced', form.Value, 'fwmark', _('Firewall Mark'), _('Optional. 32-bit mark for packets during firewall processing. Enter value in hex, starting with <code>0x</code>.'));
+		o = s.taboption('advanced', form.Value, 'fwmark', _('Firewall Mark'));
 		o.optional = true;
 		o.validate = function(section_id, value) {
 			if (value.length > 0 && !value.match(/^0x[a-fA-F0-9]{1,8}$/))
@@ -197,7 +197,7 @@ return network.registerProtocol('wireguard', {
 		// -- peers -----------------------------------------------------------------------
 
 		try {
-			s.tab('peers', _('Peers'), _('Further information about WireGuard interfaces and peers at <a href=\'http://wireguard.com\'>wireguard.com</a>.'));
+			s.tab('peers', _('Peers'));
 		}
 		catch(e) {}
 
@@ -419,10 +419,7 @@ return network.registerProtocol('wireguard', {
 				'drop': this.handleDropConfig.bind(this, mode)
 			}, [
 				E([], (mode == 'full') ? [
-					E('p', _('Drag or paste a valid <em>*.conf</em> file below to configure the local WireGuard interface.'))
-				] : [
-					E('p', _('Paste or drag a WireGuard configuration (commonly <em>wg0.conf</em>) from another system below to create a matching peer entry allowing that system to connect to the local WireGuard interface.')),
-					E('p', _('To fully configure the local WireGuard interface from an existing (e.g. provider supplied) configuration file, use the <strong><a class="full-import" href="#">configuration import</a></strong> instead.'))
+					] : [
 				]),
 				E('p', [
 					E('textarea', {
@@ -497,16 +494,16 @@ return network.registerProtocol('wireguard', {
 			return E('em', _('No peers defined yet.'));
 		};
 
-		o = ss.option(form.Flag, 'disabled', _('Disabled'), _('Enable / Disable peer. Restart wireguard interface to apply changes.'));
+		o = ss.option(form.Flag, 'disabled', _('Disable'));
 		o.editable = true;
 		o.optional = true;
-		o.width = '5%';
+		o.width = '10%';
 
-		o = ss.option(form.Value, 'description', _('Description'), _('Optional. Description of peer.'));
+		o = ss.option(form.Value, 'description', _('Description'));
 		o.placeholder = 'My Peer';
 		o.datatype = 'string';
 		o.optional = true;
-		o.width = '30%';
+		o.width = '25%';
 		o.textvalue = function(section_id) {
 			var dis = ss.getOption('disabled'),
 			    pub = ss.getOption('public_key'),
@@ -570,12 +567,12 @@ return network.registerProtocol('wireguard', {
 			btn.disabled = (!prv.isValid() || !prv.getValue());
 		}
 
-		o = ss.option(form.Value, 'public_key', _('Public Key'), _('Required. Public key of the WireGuard peer.'));
+		o = ss.option(form.Value, 'public_key', _('Public Key'));
 		o.modalonly = true;
 		o.validate = validateBase64;
 		o.onchange = handleKeyChange;
 
-		o = ss.option(form.Value, 'private_key', _('Private Key'), _('Optional. Private key of the WireGuard peer. The key is not required for establishing a connection but allows generating a peer configuration or QR code if available. It can be removed after the configuration has been exported.'));
+		o = ss.option(form.Value, 'private_key', _('Private Key'));
 		o.modalonly = true;
 		o.validate = validateBase64;
 		o.onchange = handleKeyChange;
@@ -584,7 +581,7 @@ return network.registerProtocol('wireguard', {
 		o = ss.option(cbiKeyPairGenerate, '_gen_peer_keypair', ' ');
 		o.modalonly = true;
 
-		o = ss.option(form.Value, 'preshared_key', _('Preshared Key'), _('Optional. Base64-encoded preshared key. Adds in an additional layer of symmetric-key cryptography for post-quantum resistance.'));
+		o = ss.option(form.Value, 'preshared_key', _('Preshared Key'));
 		o.modalonly = true;
 		o.validate = validateBase64;
 		o.password = true;
@@ -606,7 +603,7 @@ return network.registerProtocol('wireguard', {
 			}, [ _('Generate preshared key') ]);
 		};
 
-		o = ss.option(form.DynamicList, 'allowed_ips', _('Allowed IPs'), _("Optional. IP addresses and prefixes that this peer is allowed to use inside the tunnel. Usually the peer's tunnel IP addresses and the networks the peer routes through the tunnel."));
+		o = ss.option(form.DynamicList, 'allowed_ips', _('Allowed IPs'));
 		o.datatype = 'ipaddr';
 		o.textvalue = function(section_id) {
 			var ips = L.toArray(this.cfgvalue(section_id)),
@@ -641,10 +638,10 @@ return network.registerProtocol('wireguard', {
 			return E('span', { 'style': 'display:inline-flex;flex-wrap:wrap;gap:.125em' }, list);
 		};
 
-		o = ss.option(form.Flag, 'route_allowed_ips', _('Route Allowed IPs'), _('Optional. Create routes for Allowed IPs for this peer.'));
+		o = ss.option(form.Flag, 'route_allowed_ips', _('Route Allowed IPs'));
 		o.modalonly = true;
 
-		o = ss.option(form.Value, 'endpoint_host', _('Endpoint Host'), _('Optional. Host of peer. Names are resolved prior to bringing up the interface.'));
+		o = ss.option(form.Value, 'endpoint_host', _('Endpoint Host'));
 		o.placeholder = 'vpn.example.com';
 		o.datatype = 'host';
 		o.textvalue = function(section_id) {
@@ -660,20 +657,19 @@ return network.registerProtocol('wireguard', {
 						: '*'));
 		};
 
-		o = ss.option(form.Value, 'endpoint_port', _('Endpoint Port'), _('Optional. Port of peer.'));
+		o = ss.option(form.Value, 'endpoint_port', _('Endpoint Port'));
 		o.modalonly = true;
 		o.placeholder = '51820';
 		o.datatype = 'port';
 
-		o = ss.option(form.Value, 'persistent_keepalive', _('Persistent Keep Alive'), _('Optional. Seconds between keep alive messages. Default is 0 (disabled). Recommended value if this device is behind a NAT is 25.'));
+		o = ss.option(form.Value, 'persistent_keepalive', _('Persistent Keep Alive'));
 		o.modalonly = true;
 		o.datatype = 'range(0,65535)';
 		o.placeholder = '0';
 
 
 
-		o = ss.option(form.DummyValue, '_keyops', _('Configuration Export'),
-			_('Generates a configuration suitable for import on a WireGuard peer'));
+		o = ss.option(form.DummyValue, '_keyops', _('Configuration Export'));
 
 		o.modalonly = true;
 
@@ -753,7 +749,7 @@ return network.registerProtocol('wireguard', {
 
 				var qrm, qrs, qro;
 
-				qrm = new form.JSONMap({ config: { endpoint: hostnames[0], allowed_ips: ips, addresses: eips, dns_servers: dns } }, null, _('The generated configuration can be imported into a WireGuard client application to set up a connection towards this device.'));
+				qrm = new form.JSONMap({ config: { endpoint: hostnames[0], allowed_ips: ips, addresses: eips, dns_servers: dns } }, null,);
 				qrm.parent = parent;
 
 				qrs = qrm.section(form.NamedSection, 'config');
@@ -774,23 +770,23 @@ return network.registerProtocol('wireguard', {
 					}
 				};
 
-				qro = qrs.option(form.Value, 'endpoint', _('Connection endpoint'), _('The public hostname or IP address of this system the peer should connect to. This usually is a static public IP address, a static hostname or a DDNS domain.'));
+				qro = qrs.option(form.Value, 'endpoint', _('Connection endpoint'));
 				qro.datatype = 'or(ipaddr,hostname)';
 				hostnames.forEach(function(hostname) { qro.value(hostname) });
 				qro.onchange = handleConfigChange;
 
-				qro = qrs.option(form.DynamicList, 'allowed_ips', _('Allowed IPs'), _('IP addresses that are allowed inside the tunnel. The peer will accept tunnelled packets with source IP addresses matching this list and route back packets with matching destination IP.'));
+				qro = qrs.option(form.DynamicList, 'allowed_ips', _('Allowed IPs'));
 				qro.datatype = 'ipaddr';
 				qro.default = ips;
 				ips.forEach(function(ip) { qro.value(ip) });
 				qro.onchange = handleConfigChange;
 
-				qro = qrs.option(form.DynamicList, 'dns_servers', _('DNS Servers'), _('DNS servers for the remote clients using this tunnel to your openwrt device. Some wireguard clients require this to be set.'));
+				qro = qrs.option(form.DynamicList, 'dns_servers', _('DNS Servers'));
 				qro.datatype = 'ipaddr';
 				qro.default = dns;
 				qro.onchange = handleConfigChange;
 
-				qro = qrs.option(form.DynamicList, 'addresses', _('Addresses'), _('IP addresses for the peer to use inside the tunnel. Some clients require this setting.'));
+				qro = qrs.option(form.DynamicList, 'addresses', _('Addresses'));
 				qro.datatype = 'ipaddr';
 				qro.default = eips;
 				eips.forEach(function(eip) { qro.value(eip) });
