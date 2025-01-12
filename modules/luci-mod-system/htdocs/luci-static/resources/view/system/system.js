@@ -110,8 +110,7 @@ return view.extend({
 		    m, s, o;
 
 		m = new form.Map('system',
-			_('System'),
-			_('Here you can configure the basic aspects of your device like its hostname or the timezone.'));
+			_('System'));
 
 		m.chain('luci');
 
@@ -136,10 +135,10 @@ return view.extend({
 		o.datatype = 'hostname';
 
 		/* could be used also as a default for LLDP, SNMP "system description" in the future */
-		o = s.taboption('general', form.Value, 'description', _('Description'), _('An optional, short description for this device'));
+		o = s.taboption('general', form.Value, 'description', _('Description'));
 		o.optional = true;
 
-		o = s.taboption('general', form.TextValue, 'notes', _('Notes'), _('Optional, free-form notes about this device'));
+		o = s.taboption('general', form.TextValue, 'notes', _('Notes'));
 		o.optional = true;
 
 		o = s.taboption('general', form.ListValue, 'zonename', _('Timezone'));
@@ -159,22 +158,22 @@ return view.extend({
 		 * Logging
 		 */
 
-		o = s.taboption('logging', form.Value, 'log_size', _('System log buffer size'), "kiB");
+		o = s.taboption('logging', form.Value, 'log_size', _('System log buffer size'));
 		o.optional    = true;
 		o.placeholder = 128;
 		o.datatype    = 'uinteger';
 
-		o = s.taboption('logging', form.Value, 'log_ip', _('External system log server'));
+		o = s.taboption('logging', form.Value, 'log_ip', _('System log server'));
 		o.optional    = true;
 		o.placeholder = '0.0.0.0';
 		o.datatype    = 'host';
 
-		o = s.taboption('logging', form.Value, 'log_port', _('External system log server port'));
+		o = s.taboption('logging', form.Value, 'log_port', _('System log server port'));
 		o.optional    = true;
 		o.placeholder = 514;
 		o.datatype    = 'port';
 
-		o = s.taboption('logging', form.ListValue, 'log_proto', _('External system log server protocol'));
+		o = s.taboption('logging', form.ListValue, 'log_proto', _('System log server protocol'));
 		o.value('udp', 'UDP');
 		o.value('tcp', 'TCP');
 
@@ -182,7 +181,7 @@ return view.extend({
 		o.optional    = true;
 		o.placeholder = '/tmp/system.log';
 
-		o = s.taboption('logging', form.ListValue, 'conloglevel', _('Log output level'), _('Only affects dmesg kernel log'));
+		o = s.taboption('logging', form.ListValue, 'conloglevel', _('Log output level'));
 		o.value(8, _('Debug'));
 		o.value(7, _('Info'));
 		o.value(6, _('Notice'));
@@ -205,7 +204,7 @@ return view.extend({
 		if (L.hasSystemFeature('zram')) {
 			s.tab('zram', _('ZRam Settings'));
 
-			o = s.taboption('zram', form.Value, 'zram_size_mb', _('ZRam Size'), _('Size of the ZRam device in megabytes'));
+			o = s.taboption('zram', form.Value, 'zram_size_mb', _('ZRam Size'));
 			o.optional    = true;
 			o.placeholder = 16;
 			o.datatype    = 'uinteger';
@@ -284,8 +283,7 @@ return view.extend({
 			o.depends('enabled', '1');
 
 			o = s.taboption('timesync', widgets.NetworkSelect, 'interface',
-				_('Bind NTP server'),
-				_('Provide the NTP server to the selected interface or, if unspecified, to all interfaces'));
+				_('Bind NTP server'));
 			o.ucisection = 'ntp';
 			o.depends('enable_server', '1');
 			o.multiple = false;
@@ -297,8 +295,7 @@ return view.extend({
 			o.default = o.enabled;
 			o.depends('enabled', '1');
 
-			o = s.taboption('timesync', form.DynamicList, 'server', _('NTP server candidates'),
-				_('List of upstream NTP server candidates with which to synchronize.'));
+			o = s.taboption('timesync', form.DynamicList, 'server', _('NTP server candidates'));
 			o.datatype = 'host(0)';
 			o.ucisection = 'ntp';
 			o.depends('enabled', '1');
