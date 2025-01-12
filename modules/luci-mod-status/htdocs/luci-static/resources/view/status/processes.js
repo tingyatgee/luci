@@ -62,15 +62,15 @@ return view.extend({
 	render: function(processes) {
 		var v = E([], [
 			E('h2', _('Processes')),
-			E('div', { 'class': 'cbi-map-descr' }, _('This list gives an overview over currently running system processes and their status.')),
+			E('div', { 'class': 'cbi-map-descr' }),
 
 			E('table', { 'class': 'table' }, [
 				E('tr', { 'class': 'tr table-titles' }, [
 					E('th', { 'class': 'th' }, _('PID')),
 					E('th', { 'class': 'th' }, _('Owner')),
 					E('th', { 'class': 'th' }, _('Command')),
-					E('th', { 'class': 'th' }, _('CPU usage (%)')),
-					E('th', { 'class': 'th' }, _('Memory usage (%)')),
+					E('th', { 'class': 'th' }, _('CPU')),
+					E('th', { 'class': 'th' }, _('Memory')),
 					E('th', { 'class': 'th center nowrap cbi-section-actions' })
 				])
 			])
