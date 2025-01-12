@@ -450,9 +450,7 @@ return baseclass.extend({
 		s.tab('brport', _('Bridge port specific options'));
 		s.tab('bridgevlan', _('Bridge VLAN filtering'));
 
-		o = this.replaceOption(s, 'devgeneral', form.ListValue, 'type', _('Device type'),
-			!L.hasSystemFeature('bonding') && isNew ? '<a href="' + L.url("admin", "system", "package-manager", "?query=kmod-bonding") + '">'+
-			 _('For bonding, install %s').format('<code>kmod-bonding</code>') + '</a>' : null);
+		o = this.replaceOption(s, 'devgeneral', form.ListValue, 'type', _('Device type'));
 		o.readonly = !isNew;
 		o.value('', _('Network device'));
 		if (L.hasSystemFeature('bonding')) {
@@ -570,13 +568,13 @@ return baseclass.extend({
 		};
 		o.depends({ type: '', '!reverse': true });
 
-		o = this.replaceOption(s, 'devadvanced', form.DynamicList, 'ingress_qos_mapping', _('Ingress QoS mapping'), _('Defines a mapping of VLAN header priority to the Linux internal packet priority on incoming frames'));
+		o = this.replaceOption(s, 'devadvanced', form.DynamicList, 'ingress_qos_mapping', _('Ingress QoS mapping'));
 		o.rmempty = true;
 		o.validate = validateQoSMap;
 		o.depends('type', '8021q');
 		o.depends('type', '8021ad');
 
-		o = this.replaceOption(s, 'devadvanced', form.DynamicList, 'egress_qos_mapping', _('Egress QoS mapping'), _('Defines a mapping of Linux internal packet priority to VLAN header priority but for outgoing frames'));
+		o = this.replaceOption(s, 'devadvanced', form.DynamicList, 'egress_qos_mapping', _('Egress QoS mapping'));
 		o.rmempty = true;
 		o.validate = validateQoSMap;
 		o.depends('type', '8021q');
@@ -665,7 +663,7 @@ return baseclass.extend({
 		};
 		o.depends('type', 'bonding');
 
-		o = this.replaceOption(s, 'devgeneral', form.Flag, 'all_ports_active', _('All ports active'), _('Allow receiving on inactive ports'));
+		o = this.replaceOption(s, 'devgeneral', form.Flag, 'all_ports_active', _('All ports active'));
 		o.default = o.disabled;
 		o.depends('type', 'bonding');
 
@@ -718,12 +716,10 @@ return baseclass.extend({
 		o.depends({'type': 'bonding', 'policy': 'balance-tlb'});
 
 		o = this.replaceOption(s, 'devadvanced', form.Value, 'ad_actor_system', _('MAC address for LACPDUs'));
-		o.description = _('This specifies the mac-address for the actor in protocol packet exchanges (LACPDUs). The value cannot be NULL or multicast.');
 		o.datatype = 'macaddr';
 		o.depends({'type': 'bonding', 'policy': '802.3ad'});
 
 		o = this.replaceOption(s, 'devadvanced', form.Value, 'ad_actor_sys_prio', _('Priority'));
-		o.description = _('This specifies the AD system priority');
 		o.placeholder = '65535';
 		o.datatype = 'range(1, 65535)';
 		o.depends({'type': 'bonding', 'policy': '802.3ad'});
@@ -779,36 +775,32 @@ return baseclass.extend({
 		};
 		o.depends({'type': 'bonding', 'policy': '802.3ad'});
 
-		o = this.replaceOption(s, 'devadvanced', form.Value, 'min_links', _('Min Links'), _('Minimum number of active links'));
+		o = this.replaceOption(s, 'devadvanced', form.Value, 'min_links', _('Min Links'));
 		o.placeholder = '1';
 		o.datatype = 'uinteger';
 		o.depends({'type': 'bonding', 'policy': '802.3ad'});
 
 		o = this.replaceOption(s, 'devadvanced', form.Value, 'packets_per_slave', _('Packets per slave'));
-		o.description = _('Number of packets to transmit through a slave before moving to the next one. Slave is chosen at random when 0.');
 		o.placeholder = '1';
 		o.datatype = 'range(1, 65535)';
 		o.depends({'type': 'bonding', 'policy': 'balance-rr'});
 
 		o = this.replaceOption(s, 'devadvanced', form.Value, 'lp_interval', _('Learning packets Interval'));
-		o.description = _('Number of seconds between sent learning packets');
 		o.placeholder = '1';
 		o.datatype = 'uinteger';
 		o.depends({'type': 'bonding', 'policy': 'balance-tlb'});
 		o.depends({'type': 'bonding', 'policy': 'balance-alb'});
 
-		o = this.replaceOption(s, 'devgeneral', form.Flag, 'dynamic_lb', _('Dynamic load balance'), _('distribute traffic according to port load'));
+		o = this.replaceOption(s, 'devgeneral', form.Flag, 'dynamic_lb', _('Dynamic load balance'));
 		o.default = o.disabled;
 		o.depends({'type': 'bonding', 'policy': 'balance-tlb'});
 
 		o = this.replaceOption(s, 'devadvanced', form.Value, 'resend_igmp', _('IGMP reports'));
-		o.description = _('Specifies the number of IGMP membership reports to be issued after a failover event');
 		o.placeholder = '1';
 		o.datatype = 'range(0, 255)';
 		o.depends('type', 'bonding');
 
 		o = this.replaceOption(s, 'devadvanced', form.Value, 'num_peer_notif', _('Peer notifications'));
-		o.description = _('Specify the number of peer notifications to be issued after a failover event.');
 		o.placeholder = '1';
 		o.datatype = 'range(0, 255)';
 		o.depends('type', 'bonding');		
@@ -893,7 +885,6 @@ return baseclass.extend({
 		o.depends('type', 'bonding');
 		
 		o = this.replaceOption(s, 'devadvanced', form.Value, 'monitor_interval', _('Monitor Interval'));
-		o.description = _('Specifies the link monitoring frequency in milliseconds');
 		o.placeholder = '100';
 		o.datatype = 'uinteger';
 		o.depends('type', 'bonding');
@@ -902,7 +893,7 @@ return baseclass.extend({
 		o.datatype = 'ipaddr';
 		o.depends({'type': 'bonding', 'monitor_mode': 'arp'});
 
-		o = this.replaceOption(s, 'devgeneral', form.Flag, 'arp_all_targets', _('All ARP Targets'), _('All ARP targets must be reachable to consider the link valid'));
+		o = this.replaceOption(s, 'devgeneral', form.Flag, 'arp_all_targets', _('All ARP Targets'));
 		o.default = o.disabled;
 		o.depends({'type': 'bonding', 'monitor_mode': 'arp'});
 
@@ -956,18 +947,16 @@ return baseclass.extend({
 		o.depends({'type': 'bonding', 'policy': 'balance-xor' , 'monitor_mode': 'arp'});
 		o.depends({'type': 'bonding', 'policy': 'broadcast' , 'monitor_mode': 'arp'});
 
-		o = this.replaceOption(s, 'devadvanced', form.Flag, 'use_carrier', _('Use Carrier'), _('Use carrier status instead of MII result'));
+		o = this.replaceOption(s, 'devadvanced', form.Flag, 'use_carrier', _('Use Carrier'));
 		o.default = o.disabled;
 		o.depends({'type': 'bonding', 'monitor_mode': 'mii'});
 
 		o = this.replaceOption(s, 'devadvanced', form.Value, 'updelay', _('Monitor link-up delay'));
-		o.description = _('Delay before enabling port after MII link up event (msec)');
 		o.placeholder = '0';
 		o.datatype = 'uinteger';
 		o.depends({'type': 'bonding', 'monitor_mode': 'mii'});
 
 		o = this.replaceOption(s, 'devadvanced', form.Value, 'downdelay', _('Monitor link-down delay'));
-		o.description = _('Delay before enabling port after MII link down event (msec)');
 		o.placeholder = '0';
 		o.datatype = 'uinteger';
 		o.depends({'type': 'bonding', 'monitor_mode': 'mii'});
@@ -998,7 +987,6 @@ return baseclass.extend({
 
 			return (!parent_dev || parent_dev.getName() != bridge_name);
 		};
-		o.description = _('Specifies the wired ports to attach to this bridge. In order to attach wireless networks, choose the associated interface as network in the wireless settings.')
 		o.onchange = function(ev, section_id, values) {
 			ss.updatePorts(values);
 
@@ -1008,7 +996,7 @@ return baseclass.extend({
 		};
 		o.depends('type', 'bridge');
 
-		o = this.replaceOption(s, 'devgeneral', form.Flag, 'bridge_empty', _('Bring up empty bridge'), _('Bring up the bridge interface even if no ports are attached'));
+		o = this.replaceOption(s, 'devgeneral', form.Flag, 'bridge_empty', _('Bring up empty bridge'));
 		o.default = o.disabled;
 		o.depends('type', 'bridge');
 
@@ -1017,32 +1005,32 @@ return baseclass.extend({
 		o.datatype = 'range(0, 65535)';
 		o.depends('type', 'bridge');
 
-		o = this.replaceOption(s, 'devadvanced', form.Value, 'ageing_time', _('Ageing time'), _('Timeout in seconds for learned MAC addresses in the forwarding database'));
+		o = this.replaceOption(s, 'devadvanced', form.Value, 'ageing_time', _('Ageing time'));
 		o.placeholder = '30';
 		o.datatype = 'uinteger';
 		o.depends('type', 'bridge');
 
-		o = this.replaceOption(s, 'devadvanced', form.Flag, 'stp', _('Enable <abbr title="Spanning Tree Protocol">STP</abbr>'), _('Enables the Spanning Tree Protocol on this bridge'));
+		o = this.replaceOption(s, 'devadvanced', form.Flag, 'stp', _('Enable STP'));
 		o.default = o.disabled;
 		o.depends('type', 'bridge');
 
-		o = this.replaceOption(s, 'devadvanced', form.Value, 'hello_time', _('Hello interval'), _('Interval in seconds for STP hello packets'));
+		o = this.replaceOption(s, 'devadvanced', form.Value, 'hello_time', _('Hello interval'));
 		o.placeholder = '2';
 		o.datatype = 'range(1, 10)';
 		o.depends({ type: 'bridge', stp: '1' });
 
-		o = this.replaceOption(s, 'devadvanced', form.Value, 'forward_delay', _('Forward delay'), _('Time in seconds to spend in listening and learning states'));
+		o = this.replaceOption(s, 'devadvanced', form.Value, 'forward_delay', _('Forward delay'));
 		o.placeholder = '15';
 		o.datatype = 'range(2, 30)';
 		o.depends({ type: 'bridge', stp: '1' });
 
-		o = this.replaceOption(s, 'devadvanced', form.Value, 'max_age', _('Maximum age'), _('Timeout in seconds until topology updates on link loss'));
+		o = this.replaceOption(s, 'devadvanced', form.Value, 'max_age', _('Maximum age'));
 		o.placeholder = '20';
 		o.datatype = 'range(6, 40)';
 		o.depends({ type: 'bridge', stp: '1' });
 
 
-		o = this.replaceOption(s, 'devadvanced', form.Flag, 'igmp_snooping', _('Enable <abbr title="Internet Group Management Protocol">IGMP</abbr> snooping'), _('Enables IGMP snooping on this bridge'));
+		o = this.replaceOption(s, 'devadvanced', form.Flag, 'igmp_snooping', _('Enable IGMP snooping'));
 		o.default = o.disabled;
 		o.depends('type', 'bridge');
 
@@ -1055,17 +1043,17 @@ return baseclass.extend({
 		o.defaults = { '1': [{'igmp_snooping': '1'}], '0': [{'igmp_snooping': '0'}] };
 		o.depends('type', 'bridge');
 
-		o = this.replaceOption(s, 'devadvanced', form.Value, 'robustness', _('Robustness'), _('The robustness value allows tuning for the expected packet loss on the network. If a network is expected to be lossy, the robustness value may be increased. IGMP is robust to (Robustness-1) packet losses'));
+		o = this.replaceOption(s, 'devadvanced', form.Value, 'robustness', _('Robustness'));
 		o.placeholder = '2';
 		o.datatype = 'min(1)';
 		o.depends({ type: 'bridge', multicast_querier: '1' });
 
-		o = this.replaceOption(s, 'devadvanced', form.Value, 'query_interval', _('Query interval'), _('Interval in centiseconds between multicast general queries. By varying the value, an administrator may tune the number of IGMP messages on the subnet; larger values cause IGMP Queries to be sent less often'));
+		o = this.replaceOption(s, 'devadvanced', form.Value, 'query_interval', _('Query interval'));
 		o.placeholder = '12500';
 		o.datatype = 'uinteger';
 		o.depends({ type: 'bridge', multicast_querier: '1' });
 
-		o = this.replaceOption(s, 'devadvanced', form.Value, 'query_response_interval', _('Query response interval'), _('The max response time in centiseconds inserted into the periodic general queries. By varying the value, an administrator may tune the burstiness of IGMP messages on the subnet; larger values make the traffic less bursty, as host responses are spread out over a larger interval'));
+		o = this.replaceOption(s, 'devadvanced', form.Value, 'query_response_interval', _('Query response interval'));
 		o.placeholder = '1000';
 		o.datatype = 'uinteger';
 		o.validate = function(section_id, value) {
@@ -1079,7 +1067,7 @@ return baseclass.extend({
 		};
 		o.depends({ type: 'bridge', multicast_querier: '1' });
 
-		o = this.replaceOption(s, 'devadvanced', form.Value, 'last_member_interval', _('Last member interval'), _('The max response time in centiseconds inserted into group-specific queries sent in response to leave group messages. It is also the amount of time between group-specific query messages. This value may be tuned to modify the "leave latency" of the network. A reduced value results in reduced time to detect the loss of the last member of a group'));
+		o = this.replaceOption(s, 'devadvanced', form.Value, 'last_member_interval', _('Last member interval'));
 		o.placeholder = '100';
 		o.datatype = 'uinteger';
 		o.depends({ type: 'bridge', multicast_querier: '1' });
@@ -1151,27 +1139,27 @@ return baseclass.extend({
 			}
 		};
 
-		o = this.replaceOption(s, 'devadvanced', cbiFlagTristate, 'acceptlocal', _('Accept local'), _('Accept packets with local source addresses'));
+		o = this.replaceOption(s, 'devadvanced', cbiFlagTristate, 'acceptlocal', _('Accept local'));
 		o.sysfs = '/proc/sys/net/ipv4/conf/%s/accept_local'.format(devname || 'default');
 
 		o = this.replaceOption(s, 'devadvanced', cbiFlagTristate, 'sendredirects', _('Send ICMP redirects'));
 		o.sysfs = '/proc/sys/net/ipv4/conf/%s/send_redirects'.format(devname || 'default');
 
-		o = this.replaceOption(s, 'devadvanced', cbiFlagTristate, 'arp_accept', _('Honor gratuitous ARP'), _('When enabled, new ARP table entries are added from received gratuitous ARP requests or replies, otherwise only preexisting table entries are updated, but no new hosts are learned.'));
+		o = this.replaceOption(s, 'devadvanced', cbiFlagTristate, 'arp_accept', _('Honor gratuitous ARP'));
 		o.sysfs = '/proc/sys/net/ipv4/conf/%s/arp_accept'.format(devname || 'default');
 
-		o = this.replaceOption(s, 'devadvanced', cbiFlagTristate, 'drop_gratuitous_arp', _('Drop gratuitous ARP'), _('Drop all gratuitous ARP frames, for example if there’s a known good ARP proxy on the network and such frames need not be used or in the case of 802.11, must not be used to prevent attacks.'));
+		o = this.replaceOption(s, 'devadvanced', cbiFlagTristate, 'drop_gratuitous_arp', _('Drop gratuitous ARP'));
 		o.sysfs = '/proc/sys/net/ipv4/conf/%s/drop_gratuitous_arp'.format(devname || 'default');
 
-		o = this.replaceOption(s, 'devadvanced', form.Value, 'neighreachabletime', _('Neighbour cache validity'), _('Time in milliseconds'));
+		o = this.replaceOption(s, 'devadvanced', form.Value, 'neighreachabletime', _('Neighbour cache validity'));
 		o.placeholder = '30000';
 		o.datatype = 'uinteger';
 
-		o = this.replaceOption(s, 'devadvanced', form.Value, 'neighgcstaletime', _('Stale neighbour cache timeout'), _('Timeout in seconds'));
+		o = this.replaceOption(s, 'devadvanced', form.Value, 'neighgcstaletime', _('Stale neighbour cache timeout'));
 		o.placeholder = '60';
 		o.datatype = 'uinteger';
 
-		o = this.replaceOption(s, 'devadvanced', form.Value, 'neighlocktime', _('Minimum ARP validity time'), _('Minimum required time in seconds before an ARP entry may be replaced. Prevents ARP cache thrashing.'));
+		o = this.replaceOption(s, 'devadvanced', form.Value, 'neighlocktime', _('Minimum ARP validity time'));
 		o.placeholder = '0';
 		o.datatype = 'uinteger';
 
@@ -1182,7 +1170,7 @@ return baseclass.extend({
 		o.sysfs = '/proc/sys/net/ipv6/conf/%s/seg6_enabled'.format(devname || 'default');
 		o.depends('ipv6', /1/);
 
-		o = this.replaceOption(s, 'devadvanced', cbiFlagTristate, 'drop_unsolicited_na', _('Drop unsolicited NA'), _('Drop all unsolicited neighbor advertisements, for example if there’s a known good NA proxy on the network and such frames need not be used or in the case of 802.11, must not be used to prevent attacks.'));
+		o = this.replaceOption(s, 'devadvanced', cbiFlagTristate, 'drop_unsolicited_na', _('Drop unsolicited NA'));
 		o.sysfs = '/proc/sys/net/ipv6/conf/%s/drop_unsolicited_na'.format(devname || 'default');
 		o.depends('ipv6', /1/);
 
@@ -1190,7 +1178,7 @@ return baseclass.extend({
 		o.datatype = 'max(9200)';
 		o.depends('ipv6', /1/);
 
-		o = this.replaceOption(s, 'devgeneral', form.Value, 'dadtransmits', _('DAD transmits'), _('Amount of Duplicate Address Detection probes to send'));
+		o = this.replaceOption(s, 'devgeneral', form.Value, 'dadtransmits', _('DAD transmits'));
 		o.placeholder = '1';
 		o.datatype = 'uinteger';
 		o.depends('ipv6', /1/);
@@ -1219,7 +1207,7 @@ return baseclass.extend({
 			o = this.replaceOption(s, 'brport', cbiFlagTristate, 'unicast_flood', _('Enable unicast flooding'));
 			o.sysfs = '/sys/class/net/%s/brport/unicast_flood'.format(devname || 'default');
 
-			o = this.replaceOption(s, 'brport', cbiFlagTristate, 'isolate', _('Port isolation'), _('Only allow communication with non-isolated bridge ports when enabled'));
+			o = this.replaceOption(s, 'brport', cbiFlagTristate, 'isolate', _('Port isolation'));
 			o.sysfs = '/sys/class/net/%s/brport/isolated'.format(devname || 'default');
 
 			o = this.replaceOption(s, 'brport', form.ListValue, 'multicast_router', _('Multicast routing'));
@@ -1228,7 +1216,7 @@ return baseclass.extend({
 			o.value('2', _('Always'));
 			o.depends('multicast', /1/);
 
-			o = this.replaceOption(s, 'brport', cbiFlagTristate, 'multicast_to_unicast', _('Multicast to unicast'), _('Forward multicast packets as unicast packets on this device.'));
+			o = this.replaceOption(s, 'brport', cbiFlagTristate, 'multicast_to_unicast', _('Multicast to unicast'));
 			o.sysfs = '/sys/class/net/%s/brport/multicast_to_unicast'.format(devname || 'default');
 			o.depends('multicast', /1/);
 
@@ -1236,11 +1224,11 @@ return baseclass.extend({
 			o.sysfs = '/sys/class/net/%s/brport/multicast_fast_leave'.format(devname || 'default');
 			o.depends('multicast', /1/);
 
-			o = this.replaceOption(s, 'brport', cbiFlagTristate, 'drop_v4_unicast_in_l2_multicast', _('Drop nested IPv4 unicast'), _('Drop layer 2 multicast frames containing IPv4 unicast packets.'));
+			o = this.replaceOption(s, 'brport', cbiFlagTristate, 'drop_v4_unicast_in_l2_multicast', _('Drop nested IPv4 unicast'));
 			o.sysfs = '/proc/sys/net/ipv4/conf/%s/drop_unicast_in_l2_multicast'.format(devname || 'default');
 			o.depends('multicast', /1/);
 
-			o = this.replaceOption(s, 'brport', cbiFlagTristate, 'drop_v6_unicast_in_l2_multicast', _('Drop nested IPv6 unicast'), _('Drop layer 2 multicast frames containing IPv6 unicast packets.'));
+			o = this.replaceOption(s, 'brport', cbiFlagTristate, 'drop_v6_unicast_in_l2_multicast', _('Drop nested IPv6 unicast'));
 			o.sysfs = '/proc/sys/net/ipv6/conf/%s/drop_unicast_in_l2_multicast'.format(devname || 'default');
 			o.depends('multicast', /1/);
 		}
