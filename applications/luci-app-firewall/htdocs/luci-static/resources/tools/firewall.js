@@ -261,7 +261,7 @@ return baseclass.extend({
 	addDSCPOption: function(s, is_target) {
 		var o = s.taboption(is_target ? 'general' : 'advanced', form.Value, is_target ? 'set_dscp' : 'dscp',
 			is_target ? _('DSCP mark') : _('Match DSCP'),
-			is_target ? _('Apply the given DSCP class or value to established connections.') : _('Matches traffic carrying the specified DSCP marking.'));
+			is_target ? _('Apply the given DSCP class or value to established connections.') : _(''));
 
 		o.modalonly = true;
 		o.rmempty = !is_target;
@@ -316,7 +316,7 @@ return baseclass.extend({
 			(is_target > 1) ? _('XOR mark') : (is_target ? _('Set mark') : _('Match mark')),
 			(is_target > 1) ? _('Apply a bitwise XOR of the given value and the existing mark value on established connections. Format is value[/mask]. If a mask is specified then those bits set in the mask are zeroed out.') :
 				(is_target ? _('Set the given mark value on established connections. Format is value[/mask]. If a mask is specified then only those bits set in the mask are modified.') :
-						_('Matches a specific firewall mark or a range of different marks.')));
+						_('')));
 
 		o.modalonly = true;
 		o.rmempty = true;
@@ -346,8 +346,7 @@ return baseclass.extend({
 
 	addLimitOption: function(s) {
 		var o = s.taboption('advanced', form.Value, 'limit',
-			_('Limit matching'),
-			_('Limits traffic matching to the specified rate.'));
+			_('Limit matching'));
 
 		o.modalonly = true;
 		o.rmempty = true;
@@ -380,8 +379,7 @@ return baseclass.extend({
 
 	addLimitBurstOption: function(s) {
 		var o = s.taboption('advanced', form.Value, 'limit_burst',
-			_('Limit burst'),
-			_('Maximum initial number of packets to match: this number gets recharged by one every time the limit specified above is not reached, up to this number.'));
+			_('Limit burst'));
 
 		o.modalonly = true;
 		o.rmempty = true;
