@@ -280,14 +280,13 @@ return view.extend({
 		}, this));
 
 		if (list.firstElementChild === list.lastElementChild)
-			list.insertBefore(E('p', _('No public keys present yet.')), list.lastElementChild);
+			list.insertBefore(E('p', _('No public keys present yet')), list.lastElementChild);
 
 		window.addEventListener('dragover', handleWindowDragDropIgnore);
 		window.addEventListener('drop', handleWindowDragDropIgnore);
 
 		return E('div', {}, [
 			E('h2', _('SSH-Keys')),
-			E('div', { 'class': 'cbi-section-descr' }, _('Public keys allow for passwordless SSH logins with higher security than plain passwords. In order to upload a new key to the device, paste an OpenSSH-compatible public key or drag a <code>.pub</code> file into the input field.')),
 			E('div', { 'class': 'cbi-section-node' }, list)
 		]);
 	},
