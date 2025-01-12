@@ -136,7 +136,7 @@ return view.extend({
 	render: function(topologies) {
 		var m, s, o;
 
-		m = new form.Map('network', _('Switch'), _('The network ports on this device can be combined to several <abbr title=\"Virtual Local Area Network\">VLAN</abbr>s in which computers can communicate directly with each other. <abbr title=\"Virtual Local Area Network\">VLAN</abbr>s are often used to separate different network segments. Often there is by default one Uplink port for a connection to the next greater network like the internet and other ports for a local network.'));
+		m = new form.Map('network', _('Switch'));
 
 		var switchSections = uci.sections('network', 'switch');
 
