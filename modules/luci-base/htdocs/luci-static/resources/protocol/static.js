@@ -190,7 +190,7 @@ return network.registerProtocol('static', {
 		o.datatype = 'ip6addr("nomask")';
 		o.depends('ip6assign', '');
 
-		o = s.taboption('general', form.Value, 'ip6prefix', _('IPv6 routed prefix'), _('Public prefix routed to this device for distribution to clients.'));
+		o = s.taboption('general', form.Value, 'ip6prefix', _('IPv6 routed prefix'));
 		o.datatype = 'ip6addr';
 		o.depends('ip6assign', '');
 	}
