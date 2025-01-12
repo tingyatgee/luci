@@ -101,7 +101,7 @@ return view.extend({
 		/* Currently the sysupgrade rpc call will not return, hence no promise handling */
 		fs.exec('/sbin/firstboot', [ '-r', '-y' ]);
 
-		ui.awaitReconnect('192.168.1.1', 'openwrt.lan');
+		ui.awaitReconnect('192.168.8.1', 'openwrt.lan');
 	},
 
 	handleRestore: function(ev) {
@@ -163,7 +163,7 @@ return view.extend({
 					E('p', { 'class': 'spinning' }, _('The system is rebooting now. If the restored configuration changed the current LAN IP address, you might need to reconnect manually.'))
 				]);
 
-				ui.awaitReconnect(window.location.host, '192.168.1.1', 'openwrt.lan');
+				ui.awaitReconnect(window.location.host, '192.168.8.1', 'openwrt.lan');
 			}, this))
 			.catch(function(e) { ui.addNotification(null, E('p', e.message)) })
 			.finally(function() { btn.firstChild.data = _('Upload archive...') });
@@ -337,7 +337,7 @@ return view.extend({
 		if (opts['keep'][0].checked)
 			ui.awaitReconnect(window.location.host);
 		else
-			ui.awaitReconnect('192.168.1.1', 'openwrt.lan');
+			ui.awaitReconnect('192.168.8.1', 'openwrt.lan');
 	},
 
 	handleBackupList: function(ev) {
@@ -351,7 +351,6 @@ return view.extend({
 			}
 
 			ui.showModal(_('Backup file list'), [
-				E('p', _('Below is the determined list of files to backup. It consists of changed configuration files marked by opkg, essential base files and the user defined backup patterns.')),
 				E('ul', {}, (res.stdout || '').trim().split(/\n/).map(function(ln) { return E('li', {}, ln) })),
 				E('div', { 'class': 'right' }, [
 					E('button', {
@@ -399,7 +398,7 @@ return view.extend({
 		o.onclick = this.handleBackup;
 
 
-		o = s.option(form.SectionValue, 'actions', form.NamedSection, 'actions', 'actions', _('Restore'), _('To restore configuration files, you can upload a previously generated backup archive here. To reset the firmware to its initial state, click "Perform reset" (only possible with squashfs images).'));
+		o = s.option(form.SectionValue, 'actions', form.NamedSection, 'actions', 'actions', _('Restore'), _('To restore configuration files, you can upload a previously generated backup archive here.'));
 		ss = o.subsection;
 
 		if (has_rootfs_data) {
@@ -409,7 +408,7 @@ return view.extend({
 			o.onclick = this.handleFirstboot;
 		}
 
-		o = ss.option(form.Button, 'restore', _('Restore backup'), _('Custom files (certificates, scripts) may remain on the system. To prevent this, perform a factory-reset first.'));
+		o = ss.option(form.Button, 'restore', _('Restore backup'));
 		o.inputstyle = 'action important';
 		o.inputtitle = _('Upload archive...');
 		o.onclick = L.bind(this.handleRestore, this);
@@ -446,14 +445,14 @@ return view.extend({
 		ss = o.subsection;
 
 		if (has_sysupgrade) {
-			o = ss.option(form.Button, 'sysupgrade', _('Image'));
+			o = ss.option(form.Button, 'sysupgrade', _('Upload Image'));
 			o.inputstyle = 'action important';
 			o.inputtitle = _('Flash image...');
 			o.onclick = L.bind(this.handleSysupgrade, this, storage_size, has_rootfs_data);
 		}
 
 
-		s = m.section(form.NamedSection, 'config', 'config', _('Configuration'), _('This is a list of shell glob patterns for matching files and directories to include during sysupgrade. Modified files in /etc/config/ and certain other configurations are automatically preserved.'));
+		s = m.section(form.NamedSection, 'config', _('Configuration'));
 		s.render = L.bind(function(view /*, ... */) {
 			return form.NamedSection.prototype.render.apply(this, this.varargs(arguments, 1))
 				.then(L.bind(function(node) {
