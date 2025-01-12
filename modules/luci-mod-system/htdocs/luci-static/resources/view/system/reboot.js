@@ -18,7 +18,6 @@ return view.extend({
 	render: function(changes) {
 		var body = E([
 			E('h2', _('Reboot')),
-			E('p', {}, _('Reboots the operating system of your device'))
 		]);
 
 		for (var config in (changes || {})) {
