@@ -44,14 +44,14 @@ return network.registerProtocol('pppoe', {
 		o = s.taboption('general', form.Value, 'password', _('PAP/CHAP password'));
 		o.password = true;
 
-		o = s.taboption('general', form.Value, 'ac', _('Access Concentrator'), _('Leave empty to autodetect'));
+		o = s.taboption('general', form.Value, 'ac', _('Access Concentrator'));
 		o.placeholder = _('auto');
 
-		o = s.taboption('general', form.Value, 'service', _('Service Name'), _('Leave empty to autodetect'));
+		o = s.taboption('general', form.Value, 'service', _('Service Name'));
 		o.placeholder = _('auto');
 
 		if (L.hasSystemFeature('ipv6')) {
-			o = s.taboption('advanced', form.ListValue, 'ppp_ipv6', _('Obtain IPv6 address'), _('Enable IPv6 negotiation on the PPP link'));
+			o = s.taboption('advanced', form.ListValue, 'ppp_ipv6', _('Obtain IPv6 address'));
 			o.ucioption = 'ipv6';
 			o.value('auto', _('Automatic'));
 			o.value('0', _('Disabled'));
@@ -59,7 +59,7 @@ return network.registerProtocol('pppoe', {
 			o.default = 'auto';
 		}
 
-		o = s.taboption('advanced', form.Value, '_keepalive_failure', _('LCP echo failure threshold'), _('Presume peer to be dead after given amount of LCP echo failures, use 0 to ignore failures'));
+		o = s.taboption('advanced', form.Value, '_keepalive_failure', _('LCP echo failure threshold'));
 		o.placeholder = '5';
 		o.datatype    = 'uinteger';
 		o.write       = write_keepalive;
@@ -72,7 +72,7 @@ return network.registerProtocol('pppoe', {
 			}
 		};
 
-		o = s.taboption('advanced', form.Value, '_keepalive_interval', _('LCP echo interval'), _('Send LCP echo requests at the given interval in seconds, only effective in conjunction with failure threshold'));
+		o = s.taboption('advanced', form.Value, '_keepalive_interval', _('LCP echo interval'));
 		o.placeholder = '1';
 		o.datatype    = 'and(uinteger,min(1))';
 		o.write       = write_keepalive;
@@ -85,11 +85,11 @@ return network.registerProtocol('pppoe', {
 			}
 		};
 
-		o = s.taboption('advanced', form.Value, 'host_uniq', _('Host-Uniq tag content'), _('Raw hex-encoded bytes. Leave empty unless your ISP require this'));
+		o = s.taboption('advanced', form.Value, 'host_uniq', _('Host-Uniq tag content'));
 		o.placeholder = _('auto');
 		o.datatype    = 'hexstring';
 
-		o = s.taboption('advanced', form.Value, 'demand', _('Inactivity timeout'), _('Close inactive connection after the given amount of seconds, use 0 to persist connection'));
+		o = s.taboption('advanced', form.Value, 'demand', _('Inactivity timeout'));
 		o.placeholder = '0';
 		o.datatype    = 'uinteger';
 
