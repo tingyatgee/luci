@@ -31,10 +31,9 @@ return view.extend({
 		s.anonymous = true;
 
 		s.tab('general',  _('General Settings'));
-		s.tab('template', _('Edit Template'), _('Edit the template that is used for generating the ksmbd configuration.'));
+		s.tab('template', _('Edit Template'));
 
-		o = s.taboption('general', widgets.NetworkSelect, 'interface', _('Interface'),
-			_('Listen only on the given interface or, if unspecified, on lan'));
+		o = s.taboption('general', widgets.NetworkSelect, 'interface', _('Interface'));
 		o.multiple = true;
 		o.cfgvalue = (section_id => L.toArray(uci.get('ksmbd', section_id, 'interface')));
 		o.write = function(section_id, formvalue) {
@@ -54,13 +53,9 @@ return view.extend({
 		o = s.taboption('general', form.Value, 'description', _('Description'));
 		o.placeholder = 'Ksmbd on OpenWrt';
 		
-		o = s.taboption('general', form.Flag, 'allow_legacy_protocols', _('Allow legacy (insecure) protocols/authentication.'),
-			_('Allow legacy smb(v1)/Lanman connections, needed for older devices without smb(v2.1/3) support.'));
+		o = s.taboption('general', form.Flag, 'allow_legacy_protocols', _('Allow legacy (insecure) protocols/authentication.'));
 
-		o = s.taboption('template', form.TextValue, '_tmpl',
-			null,
-			_("This is the content of the file '/etc/ksmbd/ksmbd.conf.template' from which your ksmbd configuration will be generated. \
-			Values enclosed by pipe symbols ('|') should not be changed. They get their values from the 'General Settings' tab."));
+		o = s.taboption('template', form.TextValue, '_tmpl');
 		o.rows = 20;
 		o.cfgvalue = function(section_id) {
 			return fs.trimmed('/etc/ksmbd/ksmbd.conf.template');
@@ -70,13 +65,13 @@ return view.extend({
 		};
 
 
-		s = m.section(form.TableSection, 'share', _('Shared Directories'),
-			_('Please add directories to share. Each directory refers to a folder on a mounted device.'));
+		s = m.section(form.TableSection, 'share', _('Shared Directories'));
 		s.anonymous = true;
 		s.addremove = true;
 
 		s.option(form.Value, 'name', _('Name'));
 		o = s.option(form.Value, 'path', _('Path'));
+		o.width = '25%';
 		if (stats[0] && stats[1]) {
 			o.titleref = L.url('admin', 'system', 'mounts');
 		}
@@ -85,45 +80,35 @@ return view.extend({
 		o.enabled = 'yes';
 		o.disabled = 'no';
 		o.default = 'yes';
+		o.width = '8%';
 
 		o = s.option(form.Flag, 'read_only', _('Read-only'));
 		o.enabled = 'yes';
 		o.disabled = 'no';
 		o.default = 'no'; // ksmbd.conf default is 'yes'
 		o.rmempty = false;
-
-		s.option(form.Flag, 'force_root', _('Force Root'));
-
-		o = s.option(form.Value, 'users', _('Allowed users'));
-		o.rmempty = true;
+		o.width = '8%';
 
 		o = s.option(form.Flag, 'guest_ok', _('Allow guests'));
 		o.enabled = 'yes';
 		o.disabled = 'no';
 		o.default = 'yes'; // ksmbd.conf default is 'no'
 		o.rmempty = false;
-
-		o = s.option(form.Flag, 'inherit_owner', _('Inherit owner'));
-		o.enabled = 'yes';
-		o.disabled = 'no';
-		o.default = 'no';
-
-		o = s.option(form.Flag, 'hide_dot_files', _('Hide dot files'));
-		o.enabled = 'yes';
-		o.disabled = 'no';
-		o.default = 'yes';
+		o.width = '8%';
 
 		o = s.option(form.Value, 'create_mask', _('Create mask'));
 		o.maxlength = 4;
 		o.default = '0666'; // ksmbd.conf default is '0744'
 		o.placeholder = '0666';
 		o.rmempty = false;
+		o.width = '12%';
 
 		o = s.option(form.Value, 'dir_mask', _('Directory mask'));
 		o.maxlength = 4;
 		o.default = '0777'; // ksmbd.conf default is '0755'
 		o.placeholder = '0777';
 		o.rmempty = false;
+		o.width = '12%';
 
 		return m.render();
 	}
