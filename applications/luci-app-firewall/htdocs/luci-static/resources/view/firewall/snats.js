@@ -169,8 +169,7 @@ return view.extend({
 		    m, s, o;
 		var fw4 = L.hasSystemFeature('firewall4');
 
-		m = new form.Map('firewall', _('Firewall - NAT Rules'),
-			_('NAT rules allow fine grained control over the source IP to use for outbound or forwarded traffic.'));
+		m = new form.Map('firewall', _('Firewall - NAT Rules'));
 
 		s = m.section(form.GridSection, 'nat', _('NAT Rules'));
 		s.addremove = true;
@@ -251,15 +250,14 @@ return view.extend({
 		o.default = 'lan';
 
 		o = fwtool.addIPOption(s, 'general', 'src_ip', _('Source address'),
-			_('Match forwarded traffic from this IP or range.'), !fw4?'ipv4':'', hosts);
+			!fw4?'ipv4':'', hosts);
 		o.rmempty = true;
 		o.datatype = !fw4?'neg(ipmask4("true"))':'neg(ipmask("true"))';
 		o.validate = function(section_id, value) {
 			return !fw4?true:validate_opt_family(this, section_id, 'src_ip');
 		};
 
-		o = s.taboption('general', form.Value, 'src_port', _('Source port'),
-			_('Match forwarded traffic originating from the given source port or port range.'));
+		o = s.taboption('general', form.Value, 'src_port', _('Source port'));
 		o.modalonly = true;
 		o.rmempty = true;
 		o.datatype = 'neg(portrange)';
@@ -268,15 +266,14 @@ return view.extend({
 		o.depends({ proto: 'udp', '!contains': true });
 
 		o = fwtool.addIPOption(s, 'general', 'dest_ip', _('Destination address'),
-			_('Match forwarded traffic directed at the given IP address.'), !fw4?'ipv4':'', hosts);
+			!fw4?'ipv4':'', hosts);
 		o.rmempty = true;
 		o.datatype = !fw4?'neg(ipmask4("true"))':'neg(ipmask("true"))';
 		o.validate = function(section_id, value) {
 			return !fw4?true:validate_opt_family(this, section_id, 'dest_ip');
 		};
 
-		o = s.taboption('general', form.Value, 'dest_port', _('Destination port'),
-			_('Match forwarded traffic directed at the given destination port or port range.'));
+		o = s.taboption('general', form.Value, 'dest_port', _('Destination port'));
 		o.modalonly = true;
 		o.rmempty = true;
 		o.placeholder = _('any');
@@ -295,7 +292,7 @@ return view.extend({
 		};
 
 		o = fwtool.addLocalIPOption(s, 'general', 'snat_ip', _('Rewrite IP address'),
-			_('Rewrite matched traffic to the specified source IP address.'), devs);
+			devs);
 		o.placeholder = null;
 		o.depends('target', 'SNAT');
 		o.validate = function(section_id, value) {
@@ -308,8 +305,7 @@ return view.extend({
 			return !fw4?true:validate_opt_family(this, section_id, 'snat_ip');
 		};
 
-		o = s.taboption('general', form.Value, 'snat_port', _('Rewrite port'),
-			_('Rewrite matched traffic to the specified source port or port range.'));
+		o = s.taboption('general', form.Value, 'snat_port', _('Rewrite port'));
 		o.modalonly = true;
 		o.rmempty = true;
 		o.placeholder = _('do not rewrite');
@@ -328,8 +324,7 @@ return view.extend({
 			o.rmempty = true;
 		}
 
-		o = s.taboption('advanced', widgets.DeviceSelect, 'device', _('Outbound device'),
-			_('Matches forwarded traffic using the specified outbound network device.'));
+		o = s.taboption('advanced', widgets.DeviceSelect, 'device', _('Outbound device'));
 		o.noaliases = true;
 		o.modalonly = true;
 		o.rmempty = true;
@@ -339,8 +334,7 @@ return view.extend({
 		fwtool.addLimitBurstOption(s);
 
 		if (!have_fw4) {
-			o = s.taboption('advanced', form.Value, 'extra', _('Extra arguments'),
-				_('Passes additional arguments to iptables. Use with care!'));
+			o = s.taboption('advanced', form.Value, 'extra', _('Extra arguments'));
 			o.modalonly = true;
 			o.rmempty = true;
 		}
