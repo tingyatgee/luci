@@ -91,7 +91,7 @@ return network.registerProtocol('ppp', {
 		o.password = true;
 
 		if (L.hasSystemFeature('ipv6')) {
-			o = s.taboption('advanced', form.ListValue, 'ppp_ipv6', _('Obtain IPv6 address'), _('Enable IPv6 negotiation on the PPP link'));
+			o = s.taboption('advanced', form.ListValue, 'ppp_ipv6', _('Obtain IPv6 address'));
 			o.ucioption = 'ipv6';
 			o.value('auto', _('Automatic'));
 			o.value('0', _('Disabled'));
@@ -99,7 +99,7 @@ return network.registerProtocol('ppp', {
 			o.default = 'auto';
 		}
 
-		o = s.taboption('advanced', form.Value, '_keepalive_failure', _('LCP echo failure threshold'), _('Presume peer to be dead after given amount of LCP echo failures, use 0 to ignore failures'));
+		o = s.taboption('advanced', form.Value, '_keepalive_failure', _('LCP echo failure threshold'));
 		o.placeholder = '5';
 		o.datatype    = 'uinteger';
 		o.write       = write_keepalive;
@@ -112,7 +112,7 @@ return network.registerProtocol('ppp', {
 			}
 		};
 
-		o = s.taboption('advanced', form.Value, '_keepalive_interval', _('LCP echo interval'), _('Send LCP echo requests at the given interval in seconds, only effective in conjunction with failure threshold'));
+		o = s.taboption('advanced', form.Value, '_keepalive_interval', _('LCP echo interval'));
 		o.placeholder = '1';
 		o.datatype    = 'and(uinteger,min(1))';
 		o.write       = write_keepalive;
@@ -125,7 +125,7 @@ return network.registerProtocol('ppp', {
 			}
 		};
 
-		o = s.taboption('advanced', form.Value, 'demand', _('Inactivity timeout'), _('Close inactive connection after the given amount of seconds, use 0 to persist connection'));
+		o = s.taboption('advanced', form.Value, 'demand', _('Inactivity timeout'));
 		o.placeholder = '0';
 		o.datatype    = 'uinteger';
 
