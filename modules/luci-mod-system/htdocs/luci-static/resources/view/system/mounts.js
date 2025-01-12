@@ -147,31 +147,23 @@ return view.extend({
 		s.addremove = false;
 		s.anonymous = true;
 
-		o = s.option(form.Button, '_detect', _('Generate Config'), _('Find all currently attached filesystems and swap and replace configuration with defaults based on what was detected'));
+		o = s.option(form.Button, '_detect', _('Generate Config'));
 		o.onclick = this.handleDetect.bind(this, m);
 		o.inputstyle = 'reload';
 
-		o = s.option(form.Button, '_mountall', _('Mount attached devices'), _('Attempt to enable configured mount points for attached devices'));
+		o = s.option(form.Button, '_mountall', _('Mount attached devices'));
 		o.onclick = this.handleMountAll.bind(this, m);
 		o.inputstyle = 'reload';
 
-		o = s.option(form.Flag, 'anon_swap', _('Anonymous Swap'), _('Mount swap not specifically configured'));
-		o.default = o.disabled;
-		o.rmempty = false;
-
-		o = s.option(form.Flag, 'anon_mount', _('Anonymous Mount'), _('Mount filesystems not specifically configured'));
-		o.default = o.disabled;
-		o.rmempty = false;
-
-		o = s.option(form.Flag, 'auto_swap', _('Automount Swap'), _('Automatically mount swap on hotplug'));
+		o = s.option(form.Flag, 'auto_swap', _('Automount Swap'));
 		o.default = o.enabled;
 		o.rmempty = false;
 
-		o = s.option(form.Flag, 'auto_mount', _('Automount Filesystem'), _('Automatically mount filesystems on hotplug'));
+		o = s.option(form.Flag, 'auto_mount', _('Automount Filesystem'));
 		o.default = o.enabled;
 		o.rmempty = false;
 
-		o = s.option(form.Flag, 'check_fs', _('Check filesystems before mount'), _('Automatically check filesystem for errors before mounting'));
+		o = s.option(form.Flag, 'check_fs', _('Check filesystems'));
 		o.default = o.disabled;
 		o.rmempty = false;
 
@@ -189,7 +181,7 @@ return view.extend({
 			var table = E('table', { 'class': 'table' }, [
 				E('tr', { 'class': 'tr table-titles' }, [
 					E('th', { 'class': 'th' }, _('Filesystem')),
-					E('th', { 'class': 'th' }, _('Mount Point')),
+					E('th', { 'class': 'th' }, _('Mount Points')),
 					E('th', { 'class': 'th center' }, _('Available')),
 					E('th', { 'class': 'th center' }, _('Used')),
 					E('th', { 'class': 'th' }, _('Unmount'))
@@ -225,7 +217,7 @@ return view.extend({
 
 
 		// Mounts
-		s = m.section(form.GridSection, 'mount', _('Mount Points'), _('Mount Points define at which point a memory device will be attached to the filesystem'));
+		s = m.section(form.GridSection, 'mount', _('Mount Points'));
 		s.modaltitle = _('Mount Points - Mount Entry');
 		s.anonymous = true;
 		s.addremove = true;
@@ -240,7 +232,7 @@ return view.extend({
 		s.tab('general', _('General Settings'));
 		s.tab('advanced', _('Advanced Settings'));
 
-		o = s.taboption('general', form.Flag, 'enabled', _('Enabled'));
+		o = s.taboption('general', form.Flag, 'enabled', _('Enable'));
 		o.rmempty  = false;
 		o.default = true;
 		o.editable = true;
@@ -252,7 +244,7 @@ return view.extend({
 		o.remove = function() {};
 		o.textvalue = device_textvalue.bind(o, devices);
 
-		o = s.taboption('general', form.Value, 'uuid', _('UUID'), _('If specified, mount the device by its UUID instead of a fixed device node'));
+		o = s.taboption('general', form.Value, 'uuid', _('UUID'));
 		o.modalonly = true;
 		o.value('', _('-- match by uuid --'));
 
@@ -265,7 +257,7 @@ return view.extend({
 				o.value(dev.uuid, '%s (%s)'.format(dev.uuid, dev.dev));
 		}
 
-		o = s.taboption('general', form.Value, 'label', _('Label'), _('If specified, mount the device by the partition label instead of a fixed device node'));
+		o = s.taboption('general', form.Value, 'label', _('Label'));
 		o.modalonly = true;
 		o.depends('uuid', '');
 		o.value('', _('-- match by label --'));
@@ -278,7 +270,7 @@ return view.extend({
 				o.value(dev.label, '%s (%s)'.format(dev.label, dev.dev));
 		}
 
-		o = s.taboption('general', form.Value, 'device', _('Device'), _('The device file of the memory or partition (<abbr title="for example">e.g.</abbr> <code>/dev/sda1</code>)'));
+		o = s.taboption('general', form.Value, 'device', _('Device'));
 		o.modalonly = true;
 		o.depends({ uuid: '', label: '' });
 
@@ -290,7 +282,7 @@ return view.extend({
 				o.value(dev.dev);
 		}
 
-		o = s.taboption('general', form.Value, 'target', _('Mount point'), _('Specifies the directory the device is attached to'));
+		o = s.taboption('general', form.Value, 'target', _('Mount Points'));
 		o.value('/', _('Use as root filesystem (/)'));
 		o.value('/overlay', _('Use as external overlay (/overlay)'));
 		o.rmempty = false;
@@ -329,13 +321,13 @@ return view.extend({
 		for (var i = 0; i < filesystems.length; i++)
 			o.value(filesystems[i]);
 
-		o = s.taboption('advanced', form.Value, 'options', _('Mount options'), _('See "mount" manpage for details'));
+		o = s.taboption('advanced', form.Value, 'options', _('Options'));
 		o.textvalue = function(section_id) { return this.cfgvalue(section_id) || 'defaults' };
 		o.placeholder = 'defaults';
 
 
 		// Swaps
-		s = m.section(form.GridSection, 'swap', _('SWAP'), _('If your physical memory is insufficient unused data can be temporarily swapped to a swap-device resulting in a higher amount of usable <abbr title="Random Access Memory">RAM</abbr>. Be aware that swapping data is a very slow process as the swap-device cannot be accessed with the high datarates of the <abbr title="Random Access Memory">RAM</abbr>.'));
+		s = m.section(form.GridSection, 'swap', _('SWAP'));
 		s.modaltitle = _('Mount Points - Swap Entry');
 		s.anonymous = true;
 		s.addremove = true;
@@ -348,7 +340,7 @@ return view.extend({
 			return trEls.childNodes[0];
 		}
 
-		o = s.option(form.Flag, 'enabled', _('Enabled'));
+		o = s.option(form.Flag, 'enabled', _('Enable'));
 		o.rmempty  = false;
 		o.editable = true;
 
@@ -356,7 +348,7 @@ return view.extend({
 		o.modalonly = false;
 		o.textvalue = device_textvalue.bind(o, devices);
 
-		o = s.option(form.Value, 'uuid', _('UUID'), _('If specified, mount the device by its UUID instead of a fixed device node'));
+		o = s.option(form.Value, 'uuid', _('UUID'));
 		o.modalonly = true;
 		o.value('', _('-- match by uuid --'));
 
@@ -372,7 +364,7 @@ return view.extend({
 				o.value(dev.uuid, '%s (%s)'.format(dev.uuid, dev.dev));
 		}
 
-		o = s.option(form.Value, 'label', _('Label'), _('If specified, mount the device by the partition label instead of a fixed device node'));
+		o = s.option(form.Value, 'label', _('Label'));
 		o.modalonly = true;
 		o.depends('uuid', '');
 		o.value('', _('-- match by label --'));
@@ -388,7 +380,7 @@ return view.extend({
 				o.value(dev.label, '%s (%s)'.format(dev.label, dev.dev));
 		}
 
-		o = s.option(form.Value, 'device', _('Device'), _('The device file of the memory or partition (<abbr title="for example">e.g.</abbr> <code>/dev/sda1</code>)'));
+		o = s.option(form.Value, 'device', _('Device'));
 		o.modalonly = true;
 		o.depends({ uuid: '', label: '' });
 
