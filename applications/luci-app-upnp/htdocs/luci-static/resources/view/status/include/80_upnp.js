@@ -26,7 +26,7 @@ function handleDelRule(num, ev) {
 }
 
 return baseclass.extend({
-	title: _('Active UPnP IGD & PCP/NAT-PMP Port Maps'),
+	title: _('Active Service Port Maps'),
 
 	load: function() {
 		return Promise.all([
@@ -42,7 +42,7 @@ return baseclass.extend({
 				E('th', { 'class': 'th' }, _('Client Port')),
 				E('th', { 'class': 'th' }, _('External Port')),
 				E('th', { 'class': 'th' }, _('Protocol')),
-				E('th', { 'class': 'th right' }, _('Expires')),
+				E('th', { 'class': 'th' }, _('Expires')),
 				E('th', { 'class': 'th' }, _('Description')),
 				E('th', { 'class': 'th cbi-section-actions' }, '')
 			])
