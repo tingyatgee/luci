@@ -170,8 +170,7 @@ return view.extend({
 		    ctHelpers = data[1],
 		    m, s, o;
 
-		m = new form.Map('firewall', _('Firewall - Traffic Rules'),
-			_('Traffic rules define policies for packets travelling between different zones, for example to reject traffic between certain hosts or to open WAN ports on the router.'));
+		m = new form.Map('firewall', _('Firewall - Traffic Rules'));
 
 		s = m.section(form.GridSection, 'rule', _('Traffic Rules'));
 		s.addremove = true;
@@ -266,8 +265,7 @@ return view.extend({
 			return null;
 		};
 
-		o = s.taboption('advanced', widgets.DeviceSelect, 'device', _('Device name'),
-			_('Specifies whether to tie this traffic rule to a specific inbound or outbound network device.'));
+		o = s.taboption('advanced', widgets.DeviceSelect, 'device', _('Device name'));
 		o.modalonly = true;
 		o.noaliases = true;
 		o.rmempty = false;
@@ -436,14 +434,14 @@ return view.extend({
 		fwtool.addMarkOption(s, 2);
 		fwtool.addDSCPOption(s, true);
 
-		o = s.taboption('general', form.ListValue, 'set_helper', _('Tracking helper'), _('Assign the specified connection tracking helper to matched traffic.'));
+		o = s.taboption('general', form.ListValue, 'set_helper', _('Tracking helper'));
 		o.modalonly = true;
 		o.placeholder = _('any');
 		o.depends('target', 'HELPER');
 		for (var i = 0; i < ctHelpers.length; i++)
 			o.value(ctHelpers[i].name, '%s (%s)'.format(ctHelpers[i].description, ctHelpers[i].name.toUpperCase()));
 
-		o = s.taboption('advanced', form.Value, 'helper', _('Match helper'), _('Match traffic using the specified connection tracking helper.'));
+		o = s.taboption('advanced', form.Value, 'helper', _('Match helper'));
 		o.modalonly = true;
 		o.placeholder = _('any');
 		for (var i = 0; i < ctHelpers.length; i++)
@@ -467,8 +465,7 @@ return view.extend({
 		fwtool.addLimitBurstOption(s);
 
 		if (!L.hasSystemFeature('firewall4')) {
-			o = s.taboption('advanced', form.Value, 'extra', _('Extra arguments'),
-				_('Passes additional arguments to iptables. Use with care!'));
+			o = s.taboption('advanced', form.Value, 'extra', _('Extra arguments'));
 			o.modalonly = true;
 		}
 
