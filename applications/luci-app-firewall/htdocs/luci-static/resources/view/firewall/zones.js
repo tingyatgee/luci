@@ -35,8 +35,7 @@ return view.extend({
 		    m, s, o, inp, out;
 		var fw4 = L.hasSystemFeature('firewall4');
 
-		m = new form.Map('firewall', _('Firewall - Zone Settings'),
-			_('The firewall creates zones over your network interfaces to control network traffic flow.'));
+		m = new form.Map('firewall', _('Firewall - Zone Settings'));
 
 		s = m.section(form.TypedSection, 'defaults', _('General Settings'));
 		s.anonymous = true;
@@ -73,8 +72,7 @@ return view.extend({
 		/* Netfilter flow offload support */
 
 		if (L.hasSystemFeature('offloading')) {
-			s = m.section(form.TypedSection, 'defaults', _('Routing/NAT Offloading'),
-				_('Not fully compatible with QoS/SQM.'));
+			s = m.section(form.TypedSection, 'defaults', _('Routing/NAT Offloading'));
 
 			s.anonymous = true;
 			s.addremove = false;
@@ -122,7 +120,7 @@ return view.extend({
 			var name = uci.get('firewall', section_id, 'name');
 			if (name == null)
 				name = _("this new zone");
-			return _('This section defines common properties of %q. The <em>input</em> and <em>output</em> options set the default policies for traffic entering and leaving this zone while the <em>forward</em> option describes the policy for forwarded traffic between different networks within the zone. <em>Covered networks</em> specifies which available networks are members of this zone.')
+			return _('')
 				.replace(/%s/g, name).replace(/%q/g, '"' + name + '"');
 		};
 
@@ -164,8 +162,7 @@ return view.extend({
 		p[1].default = fwDefaults.getOutput();
 		p[2].default = fwDefaults.getForward();
 
-		o = s.taboption('general', form.Flag, 'masq', _('Masquerading'),
-			_('Enable network address and port translation IPv4 (NAT4 or NAPT4) for outbound traffic on this zone. This is typically enabled on the <em>wan</em> zone.'));
+		o = s.taboption('general', form.Flag, 'masq', _('Masquerading'));
 		o.editable = true;
 		o.tooltip = function(section_id) {
 			var family = uci.get('firewall', section_id, 'family')
@@ -224,23 +221,22 @@ return view.extend({
 			var name = uci.get('firewall', section_id, 'name');
 			if (name == null)
 				name = _("this new zone");
-			return _('The options below control the forwarding policies between this zone (%s) and other zones. <em>Destination zones</em> cover forwarded traffic <strong>originating from %q</strong>. <em>Source zones</em> match forwarded traffic from other zones <strong>targeted at %q</strong>. The forwarding rule is <em>unidirectional</em>, e.g. a forward from lan to wan does <em>not</em> imply a permission to forward from wan to lan as well.')
+			return _('')
 				.format(name);
 		};
 
-		o = s.taboption('advanced', widgets.DeviceSelect, 'device', _('Covered devices'), _('Use this option to classify zone traffic by raw, non-<em>uci</em> managed network devices.'));
+		o = s.taboption('advanced', widgets.DeviceSelect, 'device', _('Covered devices'));
 		o.modalonly = true;
 		o.noaliases = true;
 		o.multiple = true;
 
-		o = s.taboption('advanced', form.DynamicList, 'subnet', _('Covered subnets'), _('Use this option to classify zone traffic by source or destination subnet instead of networks or devices.'));
+		o = s.taboption('advanced', form.DynamicList, 'subnet', _('Covered subnets'));
 		o.datatype = 'neg(cidr("true"))';
 		o.modalonly = true;
 		o.multiple = true;
 
 		if (fw4) {
-			o = s.taboption('advanced', form.Flag, 'masq6', _('IPv6 Masquerading'),
-				_('Enable network address and port translation IPv6 (NAT6 or NAPT6) for outbound traffic on this zone.'));
+			o = s.taboption('advanced', form.Flag, 'masq6', _('IPv6 Masquerading'));
 			o.modalonly = true;
 			o.tooltip = function(section_id) {
 				var family = uci.get('firewall', section_id, 'family')
@@ -280,14 +276,14 @@ return view.extend({
 		o.placeholder = '0.0.0.0/0';
 		o.modalonly = true;
 
-		o = s.taboption('conntrack', form.Flag, 'masq_allow_invalid', _('Allow "invalid" traffic'), _('Do not install extra rules to reject forwarded traffic with conntrack state <em>invalid</em>. This may be required for complex asymmetric route setups.'));
+		o = s.taboption('conntrack', form.Flag, 'masq_allow_invalid', _('Allow "invalid" traffic'));
 		o.modalonly = true;
 
-		o = s.taboption('conntrack', form.Flag, 'auto_helper', _('Automatic helper assignment'), _('Automatically assign conntrack helpers based on traffic protocol and port'));
+		o = s.taboption('conntrack', form.Flag, 'auto_helper', _('Automatic helper assignment'));
 		o.default = o.enabled;
 		o.modalonly = true;
 
-		o = s.taboption('conntrack', form.MultiValue, 'helper', _('Conntrack helpers'), _('Explicitly choses allowed connection tracking helpers for zone traffic'));
+		o = s.taboption('conntrack', form.MultiValue, 'helper', _('Conntrack helpers'));
 		o.depends('auto_helper', '0');
 		o.modalonly = true;
 		for (var i = 0; i < ctHelpers.length; i++)
@@ -309,7 +305,7 @@ return view.extend({
 				return _('Passing raw iptables arguments to source and destination traffic classification rules allows to match packets based on other criteria than interfaces or subnets. These options should be used with extreme care as invalid values could render the firewall ruleset broken, completely exposing all services.');
 			};
 
-			o = s.taboption('extra', form.Value, 'extra_src', _('Extra source arguments'), _('Additional raw <em>iptables</em> arguments to classify zone source traffic, e.g. <code>-p tcp --sport 443</code> to only match inbound HTTPS traffic.'));
+			o = s.taboption('extra', form.Value, 'extra_src', _('Extra source arguments'));
 			o.modalonly = true;
 			o.cfgvalue = function(section_id) {
 				return uci.get('firewall', section_id, 'extra_src') || uci.get('firewall', section_id, 'extra');
@@ -319,7 +315,7 @@ return view.extend({
 				uci.set('firewall', section_id, 'extra_src', value);
 			};
 
-			o = s.taboption('extra', form.Value, 'extra_dest', _('Extra destination arguments'), _('Additional raw <em>iptables</em> arguments to classify zone destination traffic, e.g. <code>-p tcp --dport 443</code> to only match outbound HTTPS traffic.'));
+			o = s.taboption('extra', form.Value, 'extra_dest', _('Extra destination arguments'));
 			o.modalonly = true;
 			o.cfgvalue = function(section_id) {
 				return uci.get('firewall', section_id, 'extra_dest') || uci.get('firewall', section_id, 'extra_src') || uci.get('firewall', section_id, 'extra');
@@ -337,7 +333,7 @@ return view.extend({
 			var name = uci.get('firewall', section_id, 'name');
 			if (name == null)
 				name = _("this new zone");
-			return _('The options below control the forwarding policies between this zone (%s) and other zones. <em>Destination zones</em> cover forwarded traffic <strong>originating from %q</strong>. <em>Source zones</em> match forwarded traffic from other zones <strong>targeted at %q</strong>. The forwarding rule is <em>unidirectional</em>, e.g. a forward from lan to wan does <em>not</em> imply a permission to forward from wan to lan as well.')
+			return _('')
 				.format(name);
 		};
 
