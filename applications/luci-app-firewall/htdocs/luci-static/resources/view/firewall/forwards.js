@@ -149,8 +149,7 @@ return view.extend({
 		    m, s, o;
 		var fw4 = L.hasSystemFeature('firewall4');
 
-		m = new form.Map('firewall', _('Firewall - Port Forwards'),
-			_('Port forwarding allows remote computers on the Internet to connect to a specific computer or service within the private LAN.'));
+		m = new form.Map('firewall', _('Firewall - Port Forwards'));
 
 		s = m.section(form.GridSection, 'redirect', _('Port Forwards'));
 		s.addremove = true;
@@ -253,17 +252,16 @@ return view.extend({
 		o.rmempty = true;
 
 		o = fwtool.addMACOption(s, 'advanced', 'src_mac', _('Source MAC address'),
-			_('Only match incoming traffic from these MACs.'), hosts);
+			hosts);
 		o.rmempty = true;
 		o.datatype = 'list(neg(macaddr))';
 
 		o = fwtool.addIPOption(s, 'advanced', 'src_ip', _('Source IP address'),
-			_('Only match incoming traffic from this IP or range.'), !fw4?'ipv4':'', hosts);
+			!fw4?'ipv4':'', hosts);
 		o.rmempty = true;
 		o.datatype = !fw4?'neg(ipmask4("true"))':'neg(ipmask("true"))';
 
-		o = s.taboption('advanced', form.Value, 'src_port', _('Source port'),
-			_('Only match incoming traffic originating from the given source port or port range on the client host'));
+		o = s.taboption('advanced', form.Value, 'src_port', _('Source port'));
 		o.modalonly = true;
 		o.rmempty = true;
 		o.datatype = 'neg(portrange)';
@@ -272,12 +270,11 @@ return view.extend({
 		o.depends({ proto: 'udp', '!contains': true });
 
 		o = fwtool.addLocalIPOption(s, 'advanced', 'src_dip', _('External IP address'),
-			_('Only match incoming traffic directed at the given IP address.'), devs);
+			devs);
 		o.datatype = !fw4?'neg(ipmask4("true"))':'neg(ipmask("true"))';
 		o.rmempty = true;
 
-		o = s.taboption('general', form.Value, 'src_dport', _('External port'),
-			_('Match incoming traffic directed at the given destination port or port range on this host'));
+		o = s.taboption('general', form.Value, 'src_dport', _('External port'));
 		o.modalonly = true;
 		o.rmempty = false;
 		o.datatype = 'neg(portrange)';
@@ -290,12 +287,11 @@ return view.extend({
 		o.nocreate = true;
 
 		o = fwtool.addIPOption(s, 'general', 'dest_ip', _('Internal IP address'),
-			_('Redirect matched incoming traffic to the specified internal host'), !fw4?'ipv4':'', hosts);
+			!fw4?'ipv4':'', hosts);
 		o.rmempty = true;
 		o.datatype = !fw4?'ipmask4':'ipmask';
 
-		o = s.taboption('general', form.Value, 'dest_port', _('Internal port'),
-			_('Redirect matched incoming traffic to the given port on the internal host'));
+		o = s.taboption('general', form.Value, 'dest_port', _('Internal port'));
 		o.modalonly = true;
 		o.rmempty = true;
 		o.placeholder = _('any');
@@ -308,7 +304,7 @@ return view.extend({
 		o.rmempty = true;
 		o.default = o.enabled;
 
-		o = s.taboption('advanced', form.ListValue, 'reflection_src', _('Loopback source IP'), _('Specifies whether to use the external or the internal IP address for reflected traffic.'));
+		o = s.taboption('advanced', form.ListValue, 'reflection_src', _('Loopback source IP'));
 		o.modalonly = true;
 		o.depends('reflection', '1');
 		o.value('internal', _('Use internal IP address'));
@@ -317,13 +313,13 @@ return view.extend({
 			uci.set('firewall', section_id, 'reflection_src', (value != 'internal') ? value : null);
 		};
 
-		o = s.taboption('advanced', widgets.ZoneSelect, 'reflection_zone', _('Reflection zones'), _('Zones from which reflection rules shall be created. If unset, only the destination zone is used.'));
+		o = s.taboption('advanced', widgets.ZoneSelect, 'reflection_zone', _('Reflection zones'));
 		o.nocreate = true;
 		o.multiple = true;
 		o.modalonly = true;
 		o.depends('reflection', '1');
 
-		o = s.taboption('advanced', form.Value, 'helper', _('Match helper'), _('Match traffic using the specified connection tracking helper.'));
+		o = s.taboption('advanced', form.Value, 'helper', _('Match helper'));
 		o.modalonly = true;
 		o.placeholder = _('any');
 		for (var i = 0; i < ctHelpers.length; i++)
@@ -346,8 +342,7 @@ return view.extend({
 		fwtool.addLimitBurstOption(s);
 
 		if (!L.hasSystemFeature('firewall4')) {
-			o = s.taboption('advanced', form.Value, 'extra', _('Extra arguments'),
-				_('Passes additional arguments to iptables. Use with care!'));
+			o = s.taboption('advanced', form.Value, 'extra', _('Extra arguments'));
 			o.modalonly = true;
 			o.rmempty = true;
 		}
