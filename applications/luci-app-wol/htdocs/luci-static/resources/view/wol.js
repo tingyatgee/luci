@@ -35,22 +35,19 @@ return view.extend({
 		this.formdata.has_ewk = has_ewk;
 		this.formdata.has_wol = has_wol;
 
-		m = new form.JSONMap(this.formdata, _('Wake on LAN'),
-			_('Wake on LAN is a mechanism to remotely boot computers in the local network.'));
+		m = new form.JSONMap(this.formdata, _('Wake on LAN'));
 
 		s = m.section(form.NamedSection, 'wol');
 
 		if (has_ewk && has_wol) {
-			o = s.option(form.ListValue, 'executable', _('WoL program'),
-				_('Sometimes only one of the two tools works. If one fails, try the other one'));
+			o = s.option(form.ListValue, 'executable', _('WoL program'));
 
 			o.value('/usr/bin/etherwake', 'Etherwake');
 			o.value('/usr/bin/wol', 'WoL');
 		}
 
 		if (has_ewk) {
-			o = s.option(widgets.DeviceSelect, 'iface', _('Network interface to use'),
-				_('Specifies the interface the WoL packet is sent on'));
+			o = s.option(widgets.DeviceSelect, 'iface', _('Network interface to use'));
 
 			o.default = uci.get('etherwake', 'setup', 'interface');
 			o.rmempty = false;
@@ -61,8 +58,7 @@ return view.extend({
 				o.depends('executable', '/usr/bin/etherwake');
 		}
 
-		o = s.option(form.Value, 'mac', _('Host to wake up'),
-			_('Choose the host to wake up or enter a custom MAC address to use'));
+		o = s.option(form.Value, 'mac', _('Host to wake up'));
 
 		o.rmempty = false;
 
