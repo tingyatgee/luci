@@ -24,11 +24,10 @@ return baseclass.extend({
 
 		var table = E('table', { 'class': 'table' }, [
 			E('tr', { 'class': 'tr table-titles' }, [
-				E('th', { 'class': 'th' }, _('Configuration')),
+				E('th', { 'class': 'th' }, _('Note Name')),
 				E('th', { 'class': 'th' }, _('Next Update')),
 				E('th', { 'class': 'th' }, _('Lookup Hostname')),
 				E('th', { 'class': 'th' }, _('Registered IP')),
-				E('th', { 'class': 'th' }, _('Network'))
 			])
 		]);
 
