@@ -47,26 +47,6 @@ msgstr "自动移除未使用的依赖"
 msgid "Available"
 msgstr "可用"
 
-#: applications/luci-app-package-manager/htdocs/luci-static/resources/view/package-manager.js:898
-msgid ""
-"Below is a listing of the various configuration files used by <em>apk</em>. "
-"The configuration in the other files may be changed but is usually not "
-"preserved by <em>sysupgrade</em>."
-msgstr ""
-"以下列出了 <em>apk</em> 所用的多个配置文件。其他文件中的配置可以被更改但通常"
-"不会被 <em>sysupgrade</em> 保留。"
-
-#: applications/luci-app-package-manager/htdocs/luci-static/resources/view/package-manager.js:897
-msgid ""
-"Below is a listing of the various configuration files used by <em>opkg</em>. "
-"Use <em>opkg.conf</em> for global settings and <em>customfeeds.conf</em> for "
-"custom repository entries. The configuration in the other files may be "
-"changed but is usually not preserved by <em>sysupgrade</em>."
-msgstr ""
-"以下列出了 <em>opkg</em> 所使用的各个配置文件。<em>opkg.conf</em> 用于全局配"
-"置，<em>customfeeds.conf</em> 用于自定义仓库。其他配置文件的变更在<em>系统升"
-"级</em>时默认不被保留。"
-
 #: applications/luci-app-package-manager/htdocs/luci-static/resources/view/package-manager.js:804
 #: applications/luci-app-package-manager/htdocs/luci-static/resources/view/package-manager.js:850
 #: applications/luci-app-package-manager/htdocs/luci-static/resources/view/package-manager.js:915
@@ -297,10 +277,6 @@ msgstr "正在保存配置数据…"
 msgid "Size"
 msgstr "大小"
 
-#: applications/luci-app-package-manager/htdocs/luci-static/resources/view/package-manager.js:1263
-msgid "Size (%s)"
-msgstr "大小（%s）"
-
 #: applications/luci-app-package-manager/htdocs/luci-static/resources/view/package-manager.js:1158
 #: applications/luci-app-package-manager/root/usr/share/luci/menu.d/luci-app-package-manager.json:3
 msgid "Software"
@@ -412,37 +388,3 @@ msgstr "~%1024mB 已压缩"
 #: applications/luci-app-package-manager/htdocs/luci-static/resources/view/package-manager.js:952
 msgid "~%1024mB installed"
 msgstr "~%1024mB 已安装"
-
-#~ msgid "Configure opkg…"
-#~ msgstr "配置 opkg…"
-
-#~ msgid "Grant access to opkg management"
-#~ msgstr "授予访问 opkg 管理的权限"
-
-#~ msgid "Install additional software and upgrade existing packages with opkg."
-#~ msgstr "使用 opkg 安装额外的软件包并升级现有的软件包。"
-
-#~ msgid "OPKG Configuration"
-#~ msgstr "OPKG 配置"
-
-#~ msgid "The <em>opkg %h</em> command failed with code <code>%d</code>."
-#~ msgstr "<em>opkg %h</em> 命令失败，代码 <code>%d</code>。"
-
-#~ msgid "Unable to execute <em>opkg %s</em> command: %s"
-#~ msgstr "无法执行 <em>opkg %s</em> 命令：%s"
-
-#~ msgid "Waiting for the <em>opkg %h</em> command to complete…"
-#~ msgstr "等待命令 <em>opkg %h</em> 执行完成…"
-
-#~ msgid "Free space"
-#~ msgstr "空闲空间"
-
-#~ msgid "Overwrite files from other package(s)"
-#~ msgstr "覆盖其他软件包中的文件"
-
-#~ msgid ""
-#~ "Require version %h %h,\n"
-#~ "installed %h"
-#~ msgstr ""
-#~ "要求 %h %h 版本，\n"
-#~ "已安装 %h"
