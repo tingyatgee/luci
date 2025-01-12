@@ -312,7 +312,7 @@ return view.extend({
 
 		return  E([], [
 			E('h2', _('Bandwidth')),
-			E('div', {'class': 'cbi-map-descr'}, _('This page displays the bandwidth used for all available physical interfaces.')),
+			E('div', {'class': 'cbi-map-descr'}),
 			v
 		]);
 	},
