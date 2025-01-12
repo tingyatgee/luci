@@ -336,7 +336,7 @@ return view.extend({
 
 		var v = E('div', { 'class': 'cbi-map', 'id': 'map' }, [
 			E('h2', _('Connections')),
-			E('div', {'class': 'cbi-map-descr'}, _('This page displays the active connections via this device.')),
+			E('div', {'class': 'cbi-map-descr'}),
 			E('div', { 'class': 'cbi-section' }, [
 				svg,
 				E('div', { 'class': 'right' }, E('small', { 'id': 'scale' }, '-')),
