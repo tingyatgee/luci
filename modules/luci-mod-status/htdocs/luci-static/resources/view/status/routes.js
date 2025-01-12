@@ -256,7 +256,6 @@ return view.extend({
 
 		var view = E([], [
 			E('h2', {}, [ _('Routing') ]),
-			E('p', {}, [ _('The following rules are currently active on this system.') ]),
 			E('div', {}, [
 				E('div', { 'class': 'cbi-section', 'data-tab': 'ipv4routing', 'data-tab-title': _('IPv4 Routing') }, [
 					E('h3', {}, [ _('IPv4 Neighbours') ]),
