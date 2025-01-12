@@ -55,8 +55,7 @@ return view.extend({
 				triggers[i] = leds[k].triggers[i];
 
 		m = new form.Map('system',
-			_('<abbr title="Light Emitting Diode">LED</abbr> Configuration'),
-			_('Customizes the behaviour of the device <abbr title="Light Emitting Diode">LED</abbr>s if possible.'));
+			_('LED Configuration'));
 
 		s = m.section(form.GridSection, 'led', '');
 		s.anonymous = true;
@@ -67,7 +66,7 @@ return view.extend({
 
 		s.option(form.Value, 'name', _('Name'));
 
-		o = s.option(form.ListValue, 'sysfs', _('<abbr title="Light Emitting Diode">LED</abbr> Name'));
+		o = s.option(form.ListValue, 'sysfs', _('LED Name'));
 		Object.keys(leds).sort().forEach(function(name) {
 			o.value(name)
 		});
