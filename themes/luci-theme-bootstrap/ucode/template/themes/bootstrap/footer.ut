@@ -3,14 +3,7 @@
 		<footer>
 			<span>
 				Powered by
-				<a href="https://github.com/openwrt/luci" target="_blank" rel="noreferrer">
-					{{ version.luciname }} ({{ version.luciversion }})</a>
-				/
-				<a href="{{ entityencode(version.disturl ?? '#', true) }}" target="_blank" rel="noreferrer">
-					{{ version.distname }} {{ version.distversion }} ({{ version.distrevision }})</a>
-				{% if (lua_active): %}
-					/ {{ _('Lua compatibility mode active') }}
-				{% endif %}
+				<a href="https://dingyi139.github.io"> © NBDD 2025 版权所有. V1.0.68 </a> — 基于 OpenWrt v24.10 官方源码
 			</span>
 			<ul class="breadcrumb pull-right" id="modemenu" style="display:none"></ul>
 		</footer>
