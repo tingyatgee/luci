@@ -31,7 +31,7 @@ return network.registerProtocol('dhcp', {
 			}, this));
 		};
 
-		o = s.taboption('advanced', form.Flag, 'broadcast', _('Use broadcast flag'), _('Required for certain ISPs, e.g. Charter with DOCSIS 3'));
+		o = s.taboption('advanced', form.Flag, 'broadcast', _('Use broadcast flag'));
 		o.default = o.disabled;
 
 		o = s.taboption('advanced', form.Value, 'clientid', _('Client ID to send when requesting DHCP'));
