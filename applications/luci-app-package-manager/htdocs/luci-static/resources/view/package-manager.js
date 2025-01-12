@@ -894,8 +894,8 @@ function handleConfig(ev)
 				});
 		}));
 	}).then(function() {
-		var opkg_text = _('Below is a listing of the various configuration files used by <em>opkg</em>. Use <em>opkg.conf</em> for global settings and <em>customfeeds.conf</em> for custom repository entries. The configuration in the other files may be changed but is usually not preserved by <em>sysupgrade</em>.')
-		var apk_text = _('Below is a listing of the various configuration files used by <em>apk</em>. The configuration in the other files may be changed but is usually not preserved by <em>sysupgrade</em>.')
+		var opkg_text = _('')
+		var apk_text = _('')
 		var body = [
 			E('p', {}, L.hasSystemFeature('apk') ? apk_text : opkg_text)
 		];
@@ -1158,11 +1158,6 @@ return view.extend({
 			E('h2', {}, _('Software')),
 
 			E('div', { 'class': 'cbi-map-descr' }, [
-				E('span', _('Install additional software and upgrade existing packages with %s.').format(L.hasSystemFeature('apk') ? 'apk' : 'opkg')),
-				E('br'),
-				E('span', _('<strong>Warning!</strong> Package operations can <a %s>break your system</a>.').format(
-					'href="https://openwrt.org/meta/infobox/upgrade_packages_warning" target="_blank" rel="noreferrer"'
-				))
 			]),
 
 			E('div', { 'class': 'controls' }, [
@@ -1260,7 +1255,7 @@ return view.extend({
 				E('tr', { 'class': 'tr cbi-section-table-titles' }, [
 					E('th', { 'class': 'th col-2 left' }, [ _('Package name') ]),
 					E('th', { 'class': 'th col-2 left version' }, [ _('Version') ]),
-					E('th', { 'class': 'th col-1 center size'}, [ _('Size (%s)').format(L.hasSystemFeature('apk') ? '.apk' : '.ipk') ]),
+					E('th', { 'class': 'th col-1 center size'}, [ _('Size') ]),
 					E('th', { 'class': 'th col-10 left' }, [ _('Description') ]),
 					E('th', { 'class': 'th right cbi-section-actions' }, [ '\u00a0' ])
 				])
