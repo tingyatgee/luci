@@ -17,15 +17,14 @@ return view.extend({
 	render: function(data) {
 		let m, s, o;
 
-		m = new form.Map('firewall', _('Firewall - IP sets'),
-			_('firewall4 supports referencing and creating IP sets to simplify matching of large address lists without the need to create one rule per item to match. Port ranges in ipsets are unsupported by firewall4.<br />'));
+		m = new form.Map('firewall', _('Firewall - IP sets'));
 
 		var have_fw4 = L.hasSystemFeature('firewall4');
 
 		if (have_fw4) {
-			s = m.section(form.NamedSection, 'fwver', 'fwver', '', _('Your device runs firewall4.'));
+			s = m.section(form.NamedSection, 'fwver', 'fwver', '');
 		} else {
-			s = m.section(form.NamedSection, 'fwver', 'fwver', '', _('Your device does not run firewall4.'));
+			s = m.section(form.NamedSection, 'fwver', 'fwver', '');
 		}
 
 
@@ -72,12 +71,7 @@ return view.extend({
 
 		/* Direction src, dst; (Data)Types: ip, port, mac, net or set
 		   Tuples: direction_datatype e.g. src_port, dest_net */
-		o = s.option(form.DynamicList, 'match', _('Packet Field Match'),
-			_('Packet fields to match upon.<br />' +
-			  'Syntax: <em>direction_datatype</em>. e.g.: <code>src_port, dest_net</code>.<br />' +
-			  'Directions: <code>src, dst</code>. Datatypes: <code>ip, port, mac, net, set</code>.<br />' +
-			  'Direction prefixes are optional.<br />' +
-			  '*Note: datatype <code>set</code> is unsupported in fw4.'));
+		o = s.option(form.DynamicList, 'match', _('Packet Field Match'));
 		o.value('ip', _('ip: IP addr'));
 		o.value('port', _('port: Port'));
 		o.value('mac', _('mac: MAC addr'));
@@ -104,14 +98,12 @@ return view.extend({
 		if (have_fw4) {
 
 			//we have fw4
-			o = s.option(form.DynamicList, 'entry', _('IPs/Networks/MACs'),
-				_('macaddr|ip[/cidr]<br />'));
+			o = s.option(form.DynamicList, 'entry', _('IPs/Networks/MACs'));
 			o.datatype = 'or(ipaddr,macaddr)';
 			o.rmempty = true;
 
 
-			o = s.option(form.Value, 'maxelem', _('Max Entries'),
-				_('up to 65536 entries.'));
+			o = s.option(form.Value, 'maxelem', _('Max Entries'));
 			o.datatype = 'port'; //covers 16 bit size
 			o.modalonly = true;
 			o.rmempty = true;
@@ -169,8 +161,7 @@ return view.extend({
 			o.depends({storage: 'hash', match: /_ip/});
 
 
-			o = s.option(form.Value, 'maxelem', _('Max Length'),
-				_('up to 65536 entries.'));
+			o = s.option(form.Value, 'maxelem', _('Max Length'));
 			o.datatype = 'port'; //covers 16 bit size
 			o.depends('storage', 'hash');
 			o.depends('storage', 'list');
@@ -184,8 +175,7 @@ return view.extend({
 
 		}
 
-		o = s.option(form.FileUpload, 'loadfile', _('Include File'),
-			_('Path to file of CIDRs, subnets, host IPs, etc.<br />'));
+		o = s.option(form.FileUpload, 'loadfile', _('Include File'));
 		o.root_directory = '/etc/luci-uploads';
 		o.enable_delete = true;
 		o.enable_upload = true;
@@ -193,16 +183,13 @@ return view.extend({
 		o.rmempty = true;
 
 
-		o = s.option(form.Value, 'timeout', _('Timeout'),
-			_('Unit: seconds. Default <code>0</code> means the entry is added permanently to the set.<br />' +
-			  'Max: 2147483 seconds.'));
+		o = s.option(form.Value, 'timeout', _('Timeout'));
 		o.placeholder = _('0');
 		o.modalonly = true;
 		o.rmempty = true;
 
 
-		o = s.option(form.Flag, 'counters', _('Counters'),
-			_('Enables packet and byte count tracking for the set.'));
+		o = s.option(form.Flag, 'counters', _('Counters'));
 		o.modalonly = true;
 		o.rmempty = true;
 		o.default = false;
