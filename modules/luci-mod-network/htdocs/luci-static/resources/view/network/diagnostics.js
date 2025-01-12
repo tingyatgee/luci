@@ -157,7 +157,7 @@ return view.extend({
 
 		var view = E('div', { 'class': 'cbi-map'}, [
 			E('h2', {}, [ _('Diagnostics') ]),
-			E('div', { 'class': 'cbi-map-descr'}, _('Execution of various network commands to check the connection and name resolution to other systems.')),
+			E('div', { 'class': 'cbi-map-descr'}, _('')),
 			table,
 			E('div', {'class': 'cbi-section'}, [
 				E('div', { 'id' : 'command-output'},
