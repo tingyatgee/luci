@@ -225,7 +225,7 @@ return view.extend({
 
 		var v = E('div', { 'class': 'cbi-map', 'id': 'map' }, [
 			E('h2', _('System load')),
-			E('div', {'class': 'cbi-map-descr'}, _('Load Average is a metric that is used by Linux to keep track of system resources.')),
+			E('div', {'class': 'cbi-map-descr'}),
 			E('div', { 'class': 'cbi-section' }, [
 				svg,
 				E('div', { 'class': 'right' }, E('small', { 'id': 'scale' }, '-')),
