@@ -47,7 +47,7 @@ return view.extend({
 		let m, s, o;
 		var webport = (uci.get(data[0], 'config', 'address') || '0.0.0.0:2017').split(':').slice(-1)[0];
 
-		m = new form.Map('v2raya', _('v2rayA'));
+		m = new form.Map('v2raya', _('v2rayA Client'));
 
 		s = m.section(form.TypedSection);
 		s.anonymous = true;
