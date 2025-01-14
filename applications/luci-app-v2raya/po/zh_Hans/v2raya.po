@@ -46,10 +46,6 @@ msgstr "启用"
 msgid "Error"
 msgstr "错误"
 
-#: applications/luci-app-v2raya/root/usr/share/rpcd/acl.d/luci-app-v2raya.json:3
-msgid "Grant access to v2rayA configuration"
-msgstr "授予访问 v2rayA 配置的权限"
-
 #: applications/luci-app-v2raya/htdocs/luci-static/resources/view/v2raya/config.js:77
 msgid "IPv6 support"
 msgstr "IPv6 支持"
@@ -84,7 +80,7 @@ msgstr "日志级别"
 
 #: applications/luci-app-v2raya/htdocs/luci-static/resources/view/v2raya/config.js:99
 msgid "Max log retention period"
-msgstr "最长日志保留时间"
+msgstr "日志保留天数"
 
 #: applications/luci-app-v2raya/htdocs/luci-static/resources/view/v2raya/config.js:33
 msgid "NOT RUNNING"
@@ -116,21 +112,9 @@ msgstr "运行中"
 msgid "Refresh every %d seconds."
 msgstr "每 %d 秒刷新。"
 
-#: applications/luci-app-v2raya/htdocs/luci-static/resources/view/v2raya/config.js:85
-msgid "Requires nftables."
-msgstr "需要 nftables。"
-
-#: applications/luci-app-v2raya/htdocs/luci-static/resources/view/v2raya/config.js:78
-msgid "Requires working IPv6 connectivity."
-msgstr "需要工作的 IPv6 连接。"
-
 #: applications/luci-app-v2raya/htdocs/luci-static/resources/view/v2raya/config.js:92
 msgid "Trace"
 msgstr "跟踪"
-
-#: applications/luci-app-v2raya/htdocs/luci-static/resources/view/v2raya/config.js:100
-msgid "Unit: days."
-msgstr "单位：天。"
 
 #: applications/luci-app-v2raya/htdocs/luci-static/resources/view/v2raya/log.js:52
 msgid "Unknown error: %s"
@@ -145,12 +129,4 @@ msgstr "警告"
 #: applications/luci-app-v2raya/htdocs/luci-static/resources/view/v2raya/config.js:50
 #: applications/luci-app-v2raya/root/usr/share/luci/menu.d/luci-app-v2raya.json:3
 msgid "v2rayA"
-msgstr "v2rayA"
-
-#: applications/luci-app-v2raya/htdocs/luci-static/resources/view/v2raya/config.js:51
-msgid ""
-"v2rayA is a V2Ray Linux client supporting global transparent proxy, "
-"compatible with SS, SSR, Trojan(trojan-go), PingTunnel protocols."
-msgstr ""
-"v2rayA 是一个易用而强大的，跨平台的 V2Ray 客户端，支持 SS、SSR、Trojan"
-"（trojan-go）、PingTunnel 协议。"
+msgstr "v2rayA 客户端"
