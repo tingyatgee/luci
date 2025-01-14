@@ -47,8 +47,7 @@ return view.extend({
 		let m, s, o;
 		var webport = (uci.get(data[0], 'config', 'address') || '0.0.0.0:2017').split(':').slice(-1)[0];
 
-		m = new form.Map('v2raya', _('v2rayA'),
-			_('v2rayA is a V2Ray Linux client supporting global transparent proxy, compatible with SS, SSR, Trojan(trojan-go), PingTunnel protocols.'));
+		m = new form.Map('v2raya', _('v2rayA'));
 
 		s = m.section(form.TypedSection);
 		s.anonymous = true;
@@ -74,15 +73,13 @@ return view.extend({
 		o.datatype = 'ipaddrport(1)';
 		o.placeholder = '0.0.0.0:2017';
 
-		o = s.option(form.ListValue, 'ipv6_support', _('IPv6 support'),
-			_('Requires working IPv6 connectivity.'));
+		o = s.option(form.ListValue, 'ipv6_support', _('IPv6 support'));
 		o.value('auto', _('Auto'));
 		o.value('on', _('On'));
 		o.value('off', _('Off'));
 		o.default = 'auto';
 
-		o = s.option(form.ListValue, 'nftables_support', _('Nftables support'),
-			_('Requires nftables.'));
+		o = s.option(form.ListValue, 'nftables_support', _('Nftables support'));
 		o.value('auto', _('Auto'));
 		o.value('on', _('On'));
 		o.value('off', _('Off'));
@@ -96,8 +93,7 @@ return view.extend({
 		o.value('error', _('Error'));
 		o.default = 'info';
 
-		o = s.option(form.Value, 'log_max_days', _('Max log retention period'),
-			_('Unit: days.'));
+		o = s.option(form.Value, 'log_max_days', _('Max log retention period'));
 		o.datatype = 'uinteger';
 		o.placeholder = '3';
 
