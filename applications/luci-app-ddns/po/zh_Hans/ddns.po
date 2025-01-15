@@ -294,12 +294,6 @@ msgstr "名称"
 msgid "Network"
 msgstr "网络"
 
-#: applications/luci-app-ddns/htdocs/luci-static/resources/view/ddns/overview.js:865
-#: applications/luci-app-ddns/htdocs/luci-static/resources/view/ddns/overview.js:874
-#: applications/luci-app-ddns/htdocs/luci-static/resources/view/ddns/overview.js:893
-msgid "Network on which the ddns-updater scripts will be started"
-msgstr "DDNS 更新脚本将会运行于该网络"
-
 #: applications/luci-app-ddns/htdocs/luci-static/resources/view/ddns/overview.js:216
 #: applications/luci-app-ddns/htdocs/luci-static/resources/view/ddns/overview.js:1139
 msgid "Never"
