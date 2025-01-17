@@ -28,7 +28,6 @@ var commonConf = [
 	[form.Value, 'dashboard_port', _('Dashboard port'), {datatype: 'port'}],
 	[form.Value, 'dashboard_user', _('Dashboard user')],
 	[form.Value, 'dashboard_pwd', _('Dashboard password'), {password: true}],
-	[form.Value, 'assets_dir', _('Assets dir')],
 	[form.Value, 'log_file', _('Log file')],
 	[form.ListValue, 'log_level', _('Log level'), _(''), {values: ['trace', 'debug', 'info', 'warn', 'error']}],
 	[form.Value, 'log_max_days', _('Log max days'), {datatype: 'uinteger'}],
