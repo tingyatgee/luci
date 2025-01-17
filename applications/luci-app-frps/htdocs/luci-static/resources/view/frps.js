@@ -33,7 +33,6 @@ var commonConf = [
 	[form.Value, 'token', _('Token')],
 	[form.Value, 'subdomain_host', _('Subdomain host')],
 	[form.Flag, 'tcp_mux', _('TCP mux'), {datatype: 'bool', default: 'true'}],
-	[form.Value, 'custom_404_page', _('Custom 404 page')],
 	[form.Value, 'allow_ports', _('Allow ports')],
 	[form.Value, 'max_ports_per_client', _('Max ports per client'), {datatype: 'uinteger'}],
 	[form.Value, 'heartbeat_timeout', _('Heartbeat timeout'), {datatype: 'uinteger'}],
