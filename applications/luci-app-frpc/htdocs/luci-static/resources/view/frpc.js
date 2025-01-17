@@ -28,7 +28,6 @@ var commonConf = [
 	[form.Value, 'admin_port', _('Admin port'), {datatype: 'port'}],
 	[form.Value, 'admin_user', _('Admin user')],
 	[form.Value, 'admin_pwd', _('Admin password'), {password: true}],
-	[form.Value, 'assets_dir', _('Assets dir')],
 	[form.Flag, 'tcp_mux', _('TCP mux'), {datatype: 'bool', default: 'true'}],
 	[form.Value, 'user', _('User')],
 	[form.Flag, 'login_fail_exit', _('Exit when login fail'), {datatype: 'bool', default: 'true'}],
