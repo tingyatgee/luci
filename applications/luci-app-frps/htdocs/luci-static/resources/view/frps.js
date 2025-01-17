@@ -39,7 +39,6 @@ var commonConf = [
 	[form.Value, 'allow_ports', _('Allow ports')],
 	[form.Value, 'max_ports_per_client', _('Max ports per client'), {datatype: 'uinteger'}],
 	[form.Value, 'heartbeat_timeout', _('Heartbeat timeout'), {datatype: 'uinteger'}],
-	[form.DynamicList, '_', _('Additional settings'), {placeholder: 'Key-A=Value-A'}]
 ];
 
 function setParams(o, params) {
