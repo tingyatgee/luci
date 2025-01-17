@@ -22,7 +22,6 @@ var commonConf = [
 	[form.Value, 'http_proxy', _('HTTP proxy')],
 	[form.Value, 'log_file', _('Log file')],
 	[form.ListValue, 'log_level', _('Log level'), _(''), {values: ['trace', 'debug', 'info', 'warn', 'error']}],
-	[form.Value, 'log_max_days', _('Log max days'), {datatype: 'uinteger'}],
 	[form.Value, 'token', _('Token')],
 	[form.Value, 'admin_addr', _('Admin address'), {datatype: 'ipaddr'}],
 	[form.Value, 'admin_port', _('Admin port'), {datatype: 'port'}],
