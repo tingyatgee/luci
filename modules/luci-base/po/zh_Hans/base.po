@@ -641,7 +641,7 @@ msgstr "所有端口处于活动状态"
 
 #: modules/luci-mod-network/htdocs/luci-static/resources/view/network/dhcp.js:771
 msgid "All servers"
-msgstr "查询所有可用的上游解析器"
+msgstr "查询所有可用上游解析器"
 
 #: modules/luci-mod-network/htdocs/luci-static/resources/view/network/dhcp.js:673
 msgid "Allocate IPs sequentially"
