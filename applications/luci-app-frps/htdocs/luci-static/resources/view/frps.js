@@ -30,7 +30,6 @@ var commonConf = [
 	[form.Value, 'dashboard_pwd', _('Dashboard password'), {password: true}],
 	[form.Value, 'log_file', _('Log file')],
 	[form.ListValue, 'log_level', _('Log level'), _(''), {values: ['trace', 'debug', 'info', 'warn', 'error']}],
-	[form.Value, 'log_max_days', _('Log max days'), {datatype: 'uinteger'}],
 	[form.Value, 'token', _('Token')],
 	[form.Value, 'subdomain_host', _('Subdomain host')],
 	[form.Flag, 'tcp_mux', _('TCP mux'), {datatype: 'bool', default: 'true'}],
