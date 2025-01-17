@@ -36,7 +36,6 @@ var commonConf = [
 	[form.Flag, 'tls_enable', _('TLS'), {datatype: 'bool'}],
 	[form.Value, 'heartbeat_interval', _('Heartbeat interval'), {datatype: 'uinteger'}],
 	[form.Value, 'heartbeat_timeout', _('Heartbeat timeout'), {datatype: 'uinteger'}],
-	[form.DynamicList, '_', _('Additional settings'), {placeholder: 'Key-A=Value-A'}]
 ];
 
 var baseProxyConf = [
