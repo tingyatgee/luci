@@ -56,7 +56,7 @@ return baseclass.extend({
 			_('Model'),            'BayTrail Platform',
 			_('Architecture'),     boardinfo.system,
 			_('Target Platform'),  (L.isObject(boardinfo.release) ? boardinfo.release.target : ''),
-			_('Firmware Version'), 'OpenWrt v24.10 Compiled by DingYi / LuCI openwrt 24.10 branch',
+			_('Firmware Version'), 'OpenWrt v24.10 Compiled by DingYi in 2025 / LuCI openwrt 24.10 branch',
 			_('Kernel Version'),   boardinfo.kernel,
 			_('Local Time'),       datestr,
 			_('Uptime'),           systeminfo.uptime ? '%t'.format(systeminfo.uptime) : null,
