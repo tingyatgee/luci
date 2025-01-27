@@ -53,7 +53,7 @@ return baseclass.extend({
 
 		var fields = [
 			_('Hostname'),         boardinfo.hostname,
-			_('Model'),            boardinfo.model,
+			_('Model'),            'BayTrail Platform',
 			_('Architecture'),     boardinfo.system,
 			_('Target Platform'),  (L.isObject(boardinfo.release) ? boardinfo.release.target : ''),
 			_('Firmware Version'), (L.isObject(boardinfo.release) ? boardinfo.release.description + ' / ' : '') + (luciversion || ''),
