@@ -140,6 +140,7 @@ return view.extend({
 		o.depends({ 'database_limit': '0', '!reverse': 'true' });
 
 		o = s.taboption('advanced', form.Flag, 'database_compress', _('Compress database'));
+		o.default = o.enabled;
 
 		o = s.taboption('advanced', form.Value, 'database_generations', _('Stored periods'));
 
