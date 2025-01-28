@@ -6047,7 +6047,7 @@ msgstr "无标题的对端"
 
 #: modules/luci-compat/luasrc/view/cbi/tblsection.htm:151
 msgid "Up"
-msgstr "在线"
+msgstr "向上"
 
 #: modules/luci-base/htdocs/luci-static/resources/ui.js:4459
 msgid "Upload"
