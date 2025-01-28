@@ -1739,7 +1739,7 @@ msgstr "域名白名单"
 
 #: modules/luci-compat/luasrc/view/cbi/tblsection.htm:152
 msgid "Down"
-msgstr "下线"
+msgstr "向下"
 
 #: modules/luci-base/htdocs/luci-static/resources/ui.js:3066
 msgid "Download"
