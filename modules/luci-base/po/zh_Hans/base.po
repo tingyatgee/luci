@@ -1086,7 +1086,7 @@ msgstr "正在检查镜像…"
 
 #: modules/luci-mod-system/htdocs/luci-static/resources/view/system/flash.js:429
 msgid "Choose mtdblock"
-msgstr "选择 mtdblock"
+msgstr "选择分区"
 
 #: modules/luci-mod-network/htdocs/luci-static/resources/view/network/wireless.js:1296
 msgid "Cipher"
