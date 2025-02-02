@@ -5054,7 +5054,7 @@ msgstr "保存 mtdblock"
 
 #: modules/luci-mod-system/htdocs/luci-static/resources/view/system/flash.js:426
 msgid "Save mtdblock contents"
-msgstr "保存 mtdblock 内容"
+msgstr "保存 mtdblock"
 
 #: modules/luci-mod-network/htdocs/luci-static/resources/view/network/wireless.js:941
 msgid "Scan"
