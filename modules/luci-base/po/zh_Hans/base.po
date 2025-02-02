@@ -2128,15 +2128,15 @@ msgstr "外部 R1 密钥持有者列表"
 
 #: modules/luci-mod-system/htdocs/luci-static/resources/view/system/system.js:166
 msgid "System log server"
-msgstr "日志服务器地址"
+msgstr "服务器地址"
 
 #: modules/luci-mod-system/htdocs/luci-static/resources/view/system/system.js:171
 msgid "System log server port"
-msgstr "日志服务器端口"
+msgstr "服务器端口"
 
 #: modules/luci-mod-system/htdocs/luci-static/resources/view/system/system.js:176
 msgid "System log server protocol"
-msgstr "日志服务器协议"
+msgstr "服务器协议"
 
 #: protocols/luci-proto-external/htdocs/luci-static/resources/protocol/external.js:7
 msgid "Externally managed interface"
