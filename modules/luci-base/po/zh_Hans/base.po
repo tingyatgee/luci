@@ -1102,7 +1102,7 @@ msgstr "下载当前配置文件存档"
 msgid ""
 "Click \"Save mtdblock\" to download specified mtdblock file. (NOTE: THIS "
 "FEATURE IS FOR PROFESSIONALS! )"
-msgstr "下载指定 mtdblock 分区文件"
+msgstr "下载指定分区文件"
 
 #: modules/luci-base/htdocs/luci-static/resources/network.js:3908
 #: modules/luci-mod-network/htdocs/luci-static/resources/view/network/wireless.js:1054
