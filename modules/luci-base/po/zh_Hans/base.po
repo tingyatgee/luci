@@ -3735,6 +3735,10 @@ msgstr "网桥配置迁移"
 msgid "Network device"
 msgstr "网络设备"
 
+#: modules/luci-mod-system/htdocs/luci-static/resources/view/system/led-trigger/netdev.js:7
+msgid "Network device activity (kernel: netdev)"
+msgstr "网络设备活动"
+
 #: modules/luci-base/htdocs/luci-static/resources/network.js:15
 #: modules/luci-compat/luasrc/model/network.lua:33
 msgid "Network device is not present"
