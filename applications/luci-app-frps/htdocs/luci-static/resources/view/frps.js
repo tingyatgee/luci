@@ -18,12 +18,8 @@ var startupConf = [
 var commonConf = [
 	[form.Value, 'bind_addr', _('Bind address'), {datatype: 'ipaddr'}],
 	[form.Value, 'bind_port', _('Bind port'), {datatype: 'port'}],
-	[form.Value, 'bind_udp_port', _('UDP bind port'), {datatype: 'port'}],
-	[form.Value, 'kcp_bind_port', _('KCP bind port'), {datatype: 'port'}],
-	[form.Value, 'proxy_bind_addr', _('Proxy bind address'), {datatype: 'ipaddr'}],
 	[form.Value, 'vhost_http_port', _('Vhost HTTP port'), {datatype: 'port'}],
 	[form.Value, 'vhost_https_port', _('Vhost HTTPS port'), {datatype: 'port'}],
-	[form.Value, 'vhost_http_timeout', _('Vhost HTTP timeout'), {datatype: 'uinteger'}],
 	[form.Value, 'dashboard_addr', _('Dashboard address'), {datatype: 'ipaddr'}],
 	[form.Value, 'dashboard_port', _('Dashboard port'), {datatype: 'port'}],
 	[form.Value, 'dashboard_user', _('Dashboard user')],
@@ -31,11 +27,6 @@ var commonConf = [
 	[form.Value, 'log_file', _('Log file')],
 	[form.ListValue, 'log_level', _('Log level'), _(''), {values: ['trace', 'debug', 'info', 'warn', 'error']}],
 	[form.Value, 'token', _('Token')],
-	[form.Value, 'subdomain_host', _('Subdomain host')],
-	[form.Flag, 'tcp_mux', _('TCP mux'), {datatype: 'bool', default: 'true'}],
-	[form.Value, 'allow_ports', _('Allow ports')],
-	[form.Value, 'max_ports_per_client', _('Max ports per client'), {datatype: 'uinteger'}],
-	[form.Value, 'heartbeat_timeout', _('Heartbeat timeout'), {datatype: 'uinteger'}],
 ];
 
 function setParams(o, params) {
