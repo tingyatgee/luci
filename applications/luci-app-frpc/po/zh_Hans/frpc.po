@@ -28,7 +28,7 @@ msgstr "管理地址"
 
 #: applications/luci-app-frpc/htdocs/luci-static/resources/view/frpc.js:31
 msgid "Admin password"
-msgstr "管理密码"
+msgstr "登录密码"
 
 #: applications/luci-app-frpc/htdocs/luci-static/resources/view/frpc.js:29
 msgid "Admin port"
@@ -36,7 +36,7 @@ msgstr "管理端口"
 
 #: applications/luci-app-frpc/htdocs/luci-static/resources/view/frpc.js:30
 msgid "Admin user"
-msgstr "管理用户"
+msgstr "登录账户"
 
 #: applications/luci-app-frpc/htdocs/luci-static/resources/view/frpc.js:32
 msgid "Assets dir"
@@ -239,8 +239,8 @@ msgid "Unix domain socket path"
 msgstr "Unix 域套接字路径"
 
 #: applications/luci-app-frpc/htdocs/luci-static/resources/view/frpc.js:34
-msgid "User"
-msgstr "用户"
+msgid "User name"
+msgstr "名称"
 
 #: applications/luci-app-frpc/htdocs/luci-static/resources/view/frpc.js:163
 #: applications/luci-app-frpc/htdocs/luci-static/resources/view/frpc.js:165
