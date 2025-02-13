@@ -26,7 +26,7 @@ var commonConf = [
 	[form.Value, 'admin_port', _('Admin port'), {datatype: 'port'}],
 	[form.Value, 'admin_user', _('Admin user')],
 	[form.Value, 'admin_pwd', _('Admin password'), {password: true}],
-	[form.Value, 'user', _('User')],
+	[form.Value, 'user', _('User name')],
 	[form.ListValue, 'protocol', _('Protocol'), _(''), {values: ['tcp', 'kcp', 'websocket']}],
 ];
 
