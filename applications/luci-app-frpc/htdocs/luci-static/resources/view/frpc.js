@@ -19,7 +19,6 @@ var startupConf = [
 var commonConf = [
 	[form.Value, 'server_addr', _('Server address'), {datatype: 'host'}],
 	[form.Value, 'server_port', _('Server port'), {datatype: 'port'}],
-	[form.Value, 'http_proxy', _('HTTP proxy')],
 	[form.Value, 'log_file', _('Log file')],
 	[form.ListValue, 'log_level', _('Log level'), _(''), {values: ['trace', 'debug', 'info', 'warn', 'error']}],
 	[form.Value, 'token', _('Token')],
@@ -27,13 +26,8 @@ var commonConf = [
 	[form.Value, 'admin_port', _('Admin port'), {datatype: 'port'}],
 	[form.Value, 'admin_user', _('Admin user')],
 	[form.Value, 'admin_pwd', _('Admin password'), {password: true}],
-	[form.Flag, 'tcp_mux', _('TCP mux'), {datatype: 'bool', default: 'true'}],
 	[form.Value, 'user', _('User')],
-	[form.Flag, 'login_fail_exit', _('Exit when login fail'), {datatype: 'bool', default: 'true'}],
 	[form.ListValue, 'protocol', _('Protocol'), _(''), {values: ['tcp', 'kcp', 'websocket']}],
-	[form.Flag, 'tls_enable', _('TLS'), {datatype: 'bool'}],
-	[form.Value, 'heartbeat_interval', _('Heartbeat interval'), {datatype: 'uinteger'}],
-	[form.Value, 'heartbeat_timeout', _('Heartbeat timeout'), {datatype: 'uinteger'}],
 ];
 
 var baseProxyConf = [
