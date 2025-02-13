@@ -36,7 +36,7 @@ msgstr "管理端口"
 
 #: applications/luci-app-frpc/htdocs/luci-static/resources/view/frpc.js:30
 msgid "Admin user"
-msgstr "登录账户"
+msgstr "登录账号"
 
 #: applications/luci-app-frpc/htdocs/luci-static/resources/view/frpc.js:32
 msgid "Assets dir"
