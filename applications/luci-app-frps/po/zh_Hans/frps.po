@@ -60,7 +60,7 @@ msgstr "仪表板端口"
 
 #: applications/luci-app-frps/htdocs/luci-static/resources/view/frps.js:29
 msgid "Dashboard user"
-msgstr "仪表板用户"
+msgstr "仪表板账号"
 
 #: applications/luci-app-frps/htdocs/luci-static/resources/view/frps.js:35
 msgid "Disable log color"
