@@ -183,4 +183,4 @@ msgstr "映射端口 9100-9109 到本地打印机。"
 
 #: applications/luci-app-p910nd/root/usr/share/luci/menu.d/luci-app-p910nd.json:3
 msgid "p910nd - Printer server"
-msgstr "p910nd - 打印服务器"
+msgstr "打印服务器"
