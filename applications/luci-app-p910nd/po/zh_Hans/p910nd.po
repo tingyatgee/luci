@@ -127,7 +127,7 @@ msgstr "端口"
 
 #: applications/luci-app-p910nd/htdocs/luci-static/resources/view/p910nd.js:15
 msgid "Port 910n print daemon"
-msgstr "端口 910n 打印守护进程"
+msgstr "打印守护进程"
 
 #: applications/luci-app-p910nd/htdocs/luci-static/resources/view/p910nd.js:146
 msgid "Run as root"
