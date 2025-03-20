@@ -164,4 +164,4 @@ msgstr "HTTPS 端口"
 #: applications/luci-app-frps/htdocs/luci-static/resources/view/frps.js:128
 #: applications/luci-app-frps/root/usr/share/luci/menu.d/luci-app-frps.json:3
 msgid "frp Server"
-msgstr "frp 服务器"
+msgstr "穿透服务"
