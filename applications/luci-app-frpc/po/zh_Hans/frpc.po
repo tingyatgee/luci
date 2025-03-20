@@ -247,4 +247,4 @@ msgstr "名称"
 #: applications/luci-app-frpc/htdocs/luci-static/resources/view/frpc.js:175
 #: applications/luci-app-frpc/root/usr/share/luci/menu.d/luci-app-frpc.json:3
 msgid "frp Client"
-msgstr "frp 客户端"
+msgstr "内网穿透"
