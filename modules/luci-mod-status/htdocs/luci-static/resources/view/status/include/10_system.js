@@ -53,7 +53,7 @@ return baseclass.extend({
 
 		var fields = [
 			_('Hostname'),         boardinfo.hostname,
-			_('Model'),            'BayTrail Platform',
+			_('Model'),            boardinfo.model,
 			_('Architecture'),     boardinfo.system,
 			_('Target Platform'),  (L.isObject(boardinfo.release) ? boardinfo.release.target : ''),
 			_('Firmware Version'), 'OpenWrt v24.10.0 Compiled by DingYi in 2025 / LuCI openwrt 24.10 branch',
