@@ -155,10 +155,6 @@ return view.extend({
 		o.onclick = this.handleMountAll.bind(this, m);
 		o.inputstyle = 'reload';
 
-		o = s.option(form.Flag, 'auto_swap', _('Automount Swap'));
-		o.default = o.enabled;
-		o.rmempty = false;
-
 		o = s.option(form.Flag, 'auto_mount', _('Automount Filesystem'));
 		o.default = o.enabled;
 		o.rmempty = false;
