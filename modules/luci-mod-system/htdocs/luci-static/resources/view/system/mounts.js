@@ -321,11 +321,6 @@ return view.extend({
 		for (var i = 0; i < filesystems.length; i++)
 			o.value(filesystems[i]);
 
-		o = s.taboption('advanced', form.Value, 'options', _('Options'));
-		o.textvalue = function(section_id) { return this.cfgvalue(section_id) || 'defaults' };
-		o.placeholder = 'defaults';
-
-
 		// Swaps
 		s = m.section(form.GridSection, 'swap', _('SWAP'));
 		s.modaltitle = _('Mount Points - Swap Entry');
