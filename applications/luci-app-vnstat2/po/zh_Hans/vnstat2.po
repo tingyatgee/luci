@@ -104,4 +104,4 @@ msgid "vnStat"
 msgstr "网络监测"
 
 msgid "vnStat Graphs"
-msgstr "vnStat 图表"
+msgstr "监控图表"
