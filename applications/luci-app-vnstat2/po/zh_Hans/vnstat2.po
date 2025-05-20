@@ -89,7 +89,7 @@ msgid "Top"
 msgstr "顶部"
 
 msgid "Traffic Monitor"
-msgstr "流量监控器"
+msgstr "流量监控"
 
 msgid "Unconfigured interfaces"
 msgstr "未配置的接口"
