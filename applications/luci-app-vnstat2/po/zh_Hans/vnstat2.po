@@ -17,7 +17,7 @@ msgid "Cancel"
 msgstr "取消"
 
 msgid "Clear data for all interfaces"
-msgstr "清除所有接口的数据"
+msgstr "清除所有接口数据"
 
 msgid "Configuration"
 msgstr "配置"
