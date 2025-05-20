@@ -70,7 +70,7 @@ msgid ""
 msgstr "没有发现受监视的接口，转到配置以启用对一个或多个接口的监视。"
 
 msgid "No unconfigured interfaces found in database."
-msgstr "数据库中没有找到未配置的接口。"
+msgstr "数据库中没有找到未配置的接口"
 
 msgid "Summary"
 msgstr "摘要"
