@@ -97,8 +97,7 @@ return view.extend({
 
 			return E([], [
 				E('h3', _('Unconfigured interfaces')),
-				E('div', { 'class': 'cbi-section-descr' },
-				         _('These interfaces are present in the vnStat database, but are not configured above.')),
+				E('div', { 'class': 'cbi-section-descr' }),
 				table
 			]);
 		}, o, this);
