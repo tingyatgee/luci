@@ -40,13 +40,13 @@ return view.extend({
 	render: function() {
 		let m, s, o;
 
-		m = new form.Map('vnstat', _('vnStat'), _('vnStat is a network traffic monitor for Linux that keeps a log of network traffic for the selected interface(s).'));
+		m = new form.Map('vnstat', _('vnStat'));
 
 		s = m.section(form.TypedSection, 'vnstat', _('Interfaces'));
 		s.anonymous = true;
 		s.addremove = false;
 
-		o = s.option(widgets.DeviceSelect, 'interface', _('Monitor interfaces'), _('The selected interfaces are automatically added to the vnStat database upon startup.'));
+		o = s.option(widgets.DeviceSelect, 'interface', _('Monitor interfaces'));
 		o.rmempty = true;
 		o.multiple = true;
 		o.noaliases = true;
