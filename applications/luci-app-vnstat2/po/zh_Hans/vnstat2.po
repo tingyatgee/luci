@@ -32,7 +32,7 @@ msgid "Delete"
 msgstr "删除"
 
 msgid "Delete data for ALL interfaces"
-msgstr "删除所有接口的数据"
+msgstr "删除所有接口数据"
 
 msgid "Delete interface <em>%h</em>"
 msgstr "删除接口 <em>%h</em>"
