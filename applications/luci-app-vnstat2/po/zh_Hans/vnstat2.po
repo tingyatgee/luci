@@ -11,7 +11,7 @@ msgstr ""
 "X-Generator: Weblate 4.12-dev\n"
 
 msgid "5 Minute"
-msgstr "5 分钟"
+msgstr "五分钟"
 
 msgid "Cancel"
 msgstr "取消"
